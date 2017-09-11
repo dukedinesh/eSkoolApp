@@ -10,18 +10,17 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
     <application
         android:name=".User"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
         <activity
-            android:name="com.eduschool.eduschoolapp.Splash"
+            android:name=".Splash"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -31,20 +30,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.eduschool.eduschoolapp.WelcomeSlider.WelcomeActivity"
+            android:name=".WelcomeSlider.WelcomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.eduschool.eduschoolapp.MainActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait" />
 
         <service
-            android:name="com.eduschool.eduschoolapp.NotifyService"
+            android:name=".NotifyService"
             android:enabled="true"
             android:exported="true" />
 
         <receiver
-            android:name="com.eduschool.eduschoolapp.receive"
+            android:name=".receive"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -54,30 +53,30 @@
         </receiver>
 
         <activity
-            android:name="com.eduschool.eduschoolapp.Chat"
+            android:name=".Chat"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.eduschool.eduschoolapp.fab"
+            android:name=".fab"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.eduschool.eduschoolapp.recycler"
+            android:name=".recycler"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.eduschool.eduschoolapp.Gallery.demo"
+            android:name=".Gallery.demo"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.eduschool.eduschoolapp.New"
+            android:name=".New"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.eduschool.eduschoolapp.OnlineTest.OnlineTestActivity"
+            android:name=".OnlineTest.OnlineTestActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.eduschool.eduschoolapp.Attendance.Attendance"
+            android:name=".Attendance.Attendance"
             android:label="Attendance"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.eduschool.eduschoolapp.Attendance.MarkAttendance"
+            android:name=".Attendance.MarkAttendance"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ClassWork.AddClassWork"
@@ -85,54 +84,86 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="com.eduschool.eduschoolapp.OnlineTest.OnlineTestSummery"
+            android:name=".OnlineTest.OnlineTestSummery"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.eduschool.eduschoolapp.Profile.TeacherProfile"
+            android:name=".Profile.TeacherProfile"
             android:label="My Profile"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.eduschool.eduschoolapp.Profile.ParentProfile"
+            android:name=".Profile.ParentProfile"
             android:label="My Profile"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.eduschool.eduschoolapp.Home.ParentHome"
+            android:name=".Home.ParentHome"
             android:label="@string/title_activity_parent_home"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.eduschool.eduschoolapp.LoginPages.LoginPage"
+            android:name=".LoginPages.LoginPage"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.eduschool.eduschoolapp.RaiseRequest.RaiseRequestActivity"
+            android:name=".RaiseRequest.RaiseRequestActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.eduschool.eduschoolapp.Home.TeacherHome"
+            android:name=".Home.TeacherHome"
             android:label="@string/title_activity_teacher_home"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.eduschool.eduschoolapp.Gallery.AddAlbum"
+            android:name=".Gallery.AddAlbum"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.eduschool.eduschoolapp.Communication.ComposeMessage"
+            android:name=".Communication.ComposeMessage"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.eduschool.eduschoolapp.Library.ParentLibrary2"
+            android:name=".Library.ParentLibrary2"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.eduschool.eduschoolapp.Library.TeacherLibrary2"
+            android:name=".Library.TeacherLibrary2"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.eduschool.eduschoolapp.LoginPages.MainLogin"
+            android:name=".LoginPages.MainLogin"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name="com.eduschool.eduschoolapp.Survey.Take_Survey" />
-        <activity android:name="com.eduschool.eduschoolapp.Communication.SendBirthdayCard" />
-        <activity android:name="com.eduschool.eduschoolapp.RaiseRequest.SeeBirthdayCard" />
-        <activity android:name="com.eduschool.eduschoolapp.StudentSummary.StudentSummaryParent" />
-        <activity android:name="com.eduschool.eduschoolapp.StudentSummary.StudentSummaryTeacher"></activity>
+        <activity android:name=".Survey.Take_Survey"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".Communication.SendBirthdayCard"
+            android:screenOrientation="portrait" >
+
+        </activity>
+        <activity android:name=".RaiseRequest.SeeBirthdayCard"
+            android:screenOrientation="portrait">
+            </activity>
+        <activity android:name=".StudentSummary.StudentSummaryParent"
+            android:screenOrientation="portrait">
+            </activity>
+        <activity android:name=".StudentSummary.StudentSummaryTeacher"
+            android:screenOrientation="portrait">
+            </activity>
+        <activity android:name=".Survey.TakeSurveyParent"
+            android:screenOrientation="portrait">
+            </activity>
+        <activity android:name=".Attendance.MarkAttndncDiffCls"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".Attendance.UpdateOwnCls"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".Attendance.UpdateDiffCls"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".Events.CreateEventFrgmnt"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>

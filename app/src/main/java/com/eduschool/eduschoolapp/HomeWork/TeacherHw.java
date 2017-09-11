@@ -39,7 +39,6 @@ public class TeacherHw extends Fragment {
         View view = inflater.inflate(R.layout.teacher_hw, container, false);
         toolbar = (Toolbar) ((TeacherHome) getContext()).findViewById(R.id.tool_bar);
 
-
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
 
@@ -106,5 +105,6 @@ public class TeacherHw extends Fragment {
             return mNumOfTabs;
         }
     }
+
 
 }

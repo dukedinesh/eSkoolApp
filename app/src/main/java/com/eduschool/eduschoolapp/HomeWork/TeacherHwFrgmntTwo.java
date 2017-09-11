@@ -61,8 +61,19 @@ public class TeacherHwFrgmntTwo extends Fragment {
 
         View view = inflater.inflate(R.layout.teacher_hw_frgmnt_two, container, false);
         toolbar = (Toolbar) ((TeacherHome) getContext()).findViewById(R.id.tool_bar);
-        String strtext = getArguments().getString("message");
-        // Toast.makeText(getActivity(),String.valueOf(strtext),Toast.LENGTH_SHORT).show();
+        toolbar.setNavigationIcon(R.drawable.back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FragmentManager fm= ((TeacherHome)getContext()).getSupportFragmentManager();
+                fm.popBackStack();
+            }
+        });
+
+
+        final String strtext = getArguments().getString("message");
+        //Toast.makeText(getActivity(),String.valueOf(strtext),Toast.LENGTH_SHORT).show();
 
         complited = (LinearLayout) view.findViewById(R.id.complitedLayout);
         incomplited = (LinearLayout) view.findViewById(R.id.incompletelayout);
@@ -101,20 +112,31 @@ public class TeacherHwFrgmntTwo extends Fragment {
 
                 subjectName.setText(response.body().getHomeworkData().get(0).getSubject());
                 classSection.setText(response.body().getHomeworkData().get(0).getClass_() + " " + response.body().getHomeworkData().get(0).getSection());
-                createDate.setText(response.body().getHomeworkData().get(0).getDueDate());
+                createDate.setText(response.body().getHomeworkData().get(0).getCreateDate());
                 title.setText(response.body().getHomeworkData().get(0).getTitle());
                 dueDate.setText("(" + response.body().getHomeworkData().get(0).getDueDate() + ")");
                 note.setText(response.body().getHomeworkData().get(0).getNotes());
+                completed.setText(response.body().getHomeworkData().get(0).getTotalCompletehomworkStudent().toString());
+                incomplete.setText(response.body().getHomeworkData().get(0).getTotalPendinghomworkStudent().toString());
 
+                Log.d("sdc","sdxs");
 
                 progress.setVisibility(View.GONE);
 
-                for (int i = 0; i <= 1; i++) {
+                for (int i = 0; i < response.body().getHomeworkData().get(0).getTotalPendinghomworkStudent(); i++) {
+
 
                     list.add(response.body().getHomeworkData().get(0).getPendinghomworkStudent().get(i).getStuName());
-                    //complete.add(response.body().getHomeworkData().get(0).getCompletehomworkStudent().get(i).get);
+
 
                 }
+
+                for (int i = 0; i < response.body().getHomeworkData().get(0).getTotalCompletehomworkStudent(); i++) {
+
+                    complete.add(response.body().getHomeworkData().get(0).getCompletehomworkStudent().get(i).getStuName());
+
+                }
+
 
 
             }
@@ -132,40 +154,6 @@ public class TeacherHwFrgmntTwo extends Fragment {
             @Override
             public void onClick(View view) {
 
-               /* final AlertDialog.Builder builderSingle = new AlertDialog.Builder(getContext());
-
-                builderSingle.setTitle("Homework Completed:-");
-
-                final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), R.layout.custome_list_popup);
-                arrayAdapter.add("Hardik");
-                arrayAdapter.add("Archit");
-                arrayAdapter.add("Jignesh");
-                arrayAdapter.add("Umang");
-                arrayAdapter.add("Gatti");
-                arrayAdapter.add("Hardik");
-                arrayAdapter.add("Archit");
-                arrayAdapter.add("Jignesh");
-                arrayAdapter.add("Umang");
-                arrayAdapter.add("Gatti");
-
-                builderSingle.setNegativeButton("Go Back", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-
-                builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        builderSingle.show();
-
-                    }
-                });
-
-                builderSingle.show();*/
-
-
                 final Dialog dialog = new Dialog(getActivity());
                 dialog.setTitle("Homework Incomplete:-");
                 dialog.setCancelable(true);
@@ -177,7 +165,6 @@ public class TeacherHwFrgmntTwo extends Fragment {
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                         android.R.layout.simple_list_item_1, android.R.id.text1, list);
 
-                // Assign adapter to ListView
                 listView.setAdapter(adapter);
 
                 back.setOnClickListener(new View.OnClickListener() {
@@ -199,36 +186,6 @@ public class TeacherHwFrgmntTwo extends Fragment {
             @Override
             public void onClick(View view) {
 
-               /* final AlertDialog.Builder builderSingle = new AlertDialog.Builder(getContext());
-
-                builderSingle.setTitle("Homework Incomplete :-");
-
-                final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), R.layout.custome_list_popup);
-                arrayAdapter.add("Hardik");
-                arrayAdapter.add("Archit");
-                arrayAdapter.add("Jignesh");
-                arrayAdapter.add("Umang");
-                arrayAdapter.add("Gatti");
-
-
-                builderSingle.setNegativeButton("Go Back", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-
-                builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        builderSingle.show();
-
-                    }
-                });
-
-                builderSingle.show();*/
-
-
                 final Dialog dialog = new Dialog(getActivity());
                 dialog.setTitle("Homework Completed:-");
                 dialog.setCancelable(true);
@@ -236,13 +193,6 @@ public class TeacherHwFrgmntTwo extends Fragment {
 
                 ListView listView = (ListView) dialog.findViewById(R.id.listView);
                 TextView back = (TextView) dialog.findViewById(R.id.back);
-
-                complete.clear();
-                complete.add("Hardik");
-                complete.add("Archit");
-                complete.add("Jignesh");
-                complete.add("Umang");
-                complete.add("Gatti");
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                         android.R.layout.simple_list_item_1, android.R.id.text1, complete);
@@ -271,6 +221,9 @@ public class TeacherHwFrgmntTwo extends Fragment {
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 TeacherHwFrgmntThree frag1 = new TeacherHwFrgmntThree();
+                Bundle bundle=new Bundle();
+                bundle.putString("message", strtext);
+                frag1.setArguments(bundle);
                 ft.replace(R.id.replace, frag1);
                 ft.addToBackStack(null);
                 ft.commit();
@@ -285,8 +238,11 @@ public class TeacherHwFrgmntTwo extends Fragment {
         super.onResume();
         toolbar.setTitle("Home Work");
         User u = (User) getContext().getApplicationContext();
-
         u.back = false;
+
+
+
+
     }
 }
 

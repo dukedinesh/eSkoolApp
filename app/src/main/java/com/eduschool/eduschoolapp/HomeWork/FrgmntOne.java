@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,7 +12,10 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -65,6 +69,10 @@ import com.eduschool.eduschoolapp.SubjectListPOJO.SubjectListBean;
 import com.eduschool.eduschoolapp.Survey.Take_Survey;
 import com.eduschool.eduschoolapp.User;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -90,12 +98,14 @@ public class FrgmntOne extends Fragment {
     View convertView;
     TextView date, due_date, upload;
     public String a;
-    private String mCurrentPhotoPath;
+    String mCurrentPhotoPath;
     ProgressBar progress;
     String cId, sId, ssId;
     Button submit;
+    Bitmap bmp;
     EditText note;
     String sNote, sChapter;
+
 
     List<ClassList> list;
     public List<String> classlist, sectionlist, subjectlist, chapterlist, studentlist;
@@ -167,10 +177,17 @@ public class FrgmntOne extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(
+                /*Intent i = new Intent(
                         Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(i, PICK_IMAGE_REQUEST);
+                startActivityForResult(i, PICK_IMAGE_REQUEST);*/
+
+
+                Intent intent = new Intent();
+
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(Intent.createChooser(intent, "Select File"), PICK_IMAGE_REQUEST);
 
             }
         });
@@ -250,11 +267,10 @@ public class FrgmntOne extends Fragment {
 
         className.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, final int i, long l) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-
+                cId = classId.get(i);
                 Call<SectionListbean> call2 = cr.sectionList(b.school_id, classId.get(i));
-                //a = classId.get(i - 1);
 
                 //Toast.makeText(getActivity(), a, Toast.LENGTH_SHORT).show();
                 progress.setVisibility(View.VISIBLE);
@@ -277,15 +293,13 @@ public class FrgmntOne extends Fragment {
 
                             sectionId.add(response.body().getSectionList().get(i).getSectionId());
                         }
-                        a = sectionId.get(0);
-                        cId = classId.get(i);
 
 
                         ArrayAdapter<String> adp = new ArrayAdapter<String>(getContext(),
                                 android.R.layout.simple_list_item_1, sectionlist);
 
                         adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
+                        adp.notifyDataSetChanged();
                         sectionName.setAdapter(adp);
 
                         progress.setVisibility(View.GONE);
@@ -302,47 +316,8 @@ public class FrgmntOne extends Fragment {
                 });
 
 
-                Call<SubjectListBean> call1 = cr.subjectList(b.school_id, classId.get(i));
-
-                progress.setVisibility(View.VISIBLE);
-
-                call1.enqueue(new Callback<SubjectListBean>() {
-
-                    @Override
-                    public void onResponse(Call<SubjectListBean> call, Response<SubjectListBean> response) {
-
-                        listSubject = response.body().getSubjectList();
-                        subjectlist.clear();
-                        subjectId.clear();
-
-
-                        for (int i = 0; i < response.body().getSubjectList().size(); i++) {
-
-                            subjectlist.add(response.body().getSubjectList().get(i).getSubjectName());
-                            subjectId.add(response.body().getSubjectList().get(i).getSubjectId());
-                        }
-
-                        ssId = subjectId.get(i);
-
-                        ArrayAdapter<String> adp = new ArrayAdapter<String>(getContext(),
-                                android.R.layout.simple_list_item_1, subjectlist);
-
-                        adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        subjectName.setAdapter(adp);
-                        progress.setVisibility(View.GONE);
-
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<SubjectListBean> call, Throwable throwable) {
-                        progress.setVisibility(View.GONE);
-
-                    }
-                });
-
 //                    Log.d("subjectId", String.valueOf(subjectId.get(0)));
-                Call<ChapterListbean> call = cr.chapterList(b.school_id, "8", "7");
+                Call<ChapterListbean> call = cr.chapterList(b.school_id, cId, ssId);
 
 
                 progress.setVisibility(View.VISIBLE);
@@ -363,17 +338,16 @@ public class FrgmntOne extends Fragment {
 
                             chapterId.add(response.body().getChapterList().get(i).getChapterId());
 
-
                         }
 
-                        sChapter = chapterId.get(i);
 
-                        ArrayAdapter<String> adp = new ArrayAdapter<String>(getContext(),
+                        ArrayAdapter<String> adp2 = new ArrayAdapter<String>(getContext(),
                                 android.R.layout.simple_list_item_1, chapterlist);
 
-                        adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        adp2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        adp2.notifyDataSetChanged();
+                        chapter.setAdapter(adp2);
 
-                        chapter.setAdapter(adp);
                         progress.setVisibility(View.GONE);
 
                     }
@@ -385,6 +359,7 @@ public class FrgmntOne extends Fragment {
                     }
                 });
 
+
             }
 
             @Override
@@ -394,10 +369,13 @@ public class FrgmntOne extends Fragment {
         });
 
 
-            /*@Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, final int i, long l) {
+        subjectName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-                Call<SubjectListBean> call1 = cr.subjectList(b.school_id, classId.get(i));
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ssId = subjectId.get(i);
+
+                Call<SubjectListBean> call1 = cr.subjectList(b.school_id, cId,sId);
 
                 progress.setVisibility(View.VISIBLE);
 
@@ -406,57 +384,51 @@ public class FrgmntOne extends Fragment {
                     @Override
                     public void onResponse(Call<SubjectListBean> call, Response<SubjectListBean> response) {
 
-                        for (int i = 0; i < response.body().getSubjectList().size(); i++) {
 
+                        for (int i = 0; i < response.body().getSubjectList().size(); i++) {
 
                         }
 
-                        progress.setVisibility(View.GONE);
 
-                        ssId = subjectId.get(i);
-                        Log.d("subject", ssId);
-
-                        Call<ChapterListbean> call1 = cr.chapterList(b.school_id, cId, ssId);
+                        Call<ChapterListbean> call2 = cr.chapterList(b.school_id, cId, ssId);
 
 
                         progress.setVisibility(View.VISIBLE);
 
 
-                        call1.enqueue(new Callback<ChapterListbean>() {
+                        call2.enqueue(new Callback<ChapterListbean>() {
 
                             @Override
-                            public void onResponse(Call<ChapterListbean> call1, Response<ChapterListbean> response) {
+                            public void onResponse(Call<ChapterListbean> call2, Response<ChapterListbean> response) {
 
 
                                 listChapter = response.body().getChapterList();
                                 chapterlist.clear();
-                                chapterlist.clear();
+                                chapterId.clear();
                                 for (int i = 0; i < response.body().getChapterList().size(); i++) {
 
                                     chapterlist.add(response.body().getChapterList().get(i).getChapterName());
 
-                                    chapterId.add(response.body().getChapterList().get(i).getChapterName());
-
+                                    chapterId.add(response.body().getChapterList().get(i).getChapterId());
 
                                 }
-
-
-                                ArrayAdapter<String> adp = new ArrayAdapter<String>(getContext(),
+                                ArrayAdapter<String> adp2 = new ArrayAdapter<String>(getContext(),
                                         android.R.layout.simple_list_item_1, chapterlist);
 
-                                adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-                                chapter.setAdapter(adp);
+                                adp2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                adp2.notifyDataSetChanged();
+                                chapter.setAdapter(adp2);
                                 progress.setVisibility(View.GONE);
 
                             }
 
                             @Override
-                            public void onFailure(Call<ChapterListbean> call, Throwable throwable) {
+                            public void onFailure(Call<ChapterListbean> call2, Throwable throwable) {
                                 progress.setVisibility(View.GONE);
 
                             }
                         });
+
 
                     }
 
@@ -467,6 +439,7 @@ public class FrgmntOne extends Fragment {
                     }
                 });
 
+
             }
 
             @Override
@@ -474,7 +447,46 @@ public class FrgmntOne extends Fragment {
 
             }
         });
-*/
+
+
+        chapter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, final int i, long l) {
+
+                Call<ChapterListbean> call = cr.chapterList(b.school_id, cId, ssId);
+
+                progress.setVisibility(View.VISIBLE);
+
+                call.enqueue(new Callback<ChapterListbean>() {
+
+                    @Override
+                    public void onResponse(Call<ChapterListbean> call, Response<ChapterListbean> response) {
+
+                        for (int i = 0; i < response.body().getChapterList().size(); i++) {
+
+
+                        }
+
+                        sChapter = chapterId.get(i);
+                        progress.setVisibility(View.GONE);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ChapterListbean> call, Throwable throwable) {
+                        progress.setVisibility(View.GONE);
+
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
         sectionName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, final int i, long l) {
@@ -528,6 +540,8 @@ public class FrgmntOne extends Fragment {
 
                                 }
 
+
+
                                 progress.setVisibility(View.GONE);
 
                                 Log.d("name", String.valueOf(studentlist.get(0)));
@@ -546,6 +560,47 @@ public class FrgmntOne extends Fragment {
 
                     @Override
                     public void onFailure(Call<SectionListbean> call, Throwable throwable) {
+                        progress.setVisibility(View.GONE);
+
+                    }
+                });
+
+
+                Call<SubjectListBean> call1 = cr.subjectList(b.school_id, classId.get(i),sectionId.get(i));
+
+                progress.setVisibility(View.VISIBLE);
+
+                call1.enqueue(new Callback<SubjectListBean>() {
+
+                    @Override
+                    public void onResponse(Call<SubjectListBean> call, Response<SubjectListBean> response) {
+
+                        listSubject = response.body().getSubjectList();
+                        subjectlist.clear();
+                        subjectId.clear();
+
+
+                        for (int i = 0; i < response.body().getSubjectList().size(); i++) {
+
+                            subjectlist.add(response.body().getSubjectList().get(i).getSubjectName());
+                            subjectId.add(response.body().getSubjectList().get(i).getSubjectId());
+                        }
+
+                        ArrayAdapter<String> adp1 = new ArrayAdapter<String>(getContext(),
+                                android.R.layout.simple_list_item_1, subjectlist);
+
+                        adp1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        subjectName.setAdapter(adp1);
+                        adp1.notifyDataSetChanged();
+
+
+                        progress.setVisibility(View.GONE);
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<SubjectListBean> call, Throwable throwable) {
                         progress.setVisibility(View.GONE);
 
                     }
@@ -586,6 +641,9 @@ public class FrgmntOne extends Fragment {
         });
 
 
+
+
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -599,54 +657,83 @@ public class FrgmntOne extends Fragment {
 
 
                         sNote = note.getText().toString().trim();
-                        Log.d("note", sNote);
 
-                        File file = new File(mCurrentPhotoPath);
-                        final User b = (User) getActivity().getApplicationContext();
-
-                        RequestBody reqFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-
-                        MultipartBody.Part body = MultipartBody.Part.createFormData("attach", file.getName(), reqFile);
+                        if (!due_date.getText().toString().equals("Due Date")) {
 
 
-                        Retrofit retrofit = new Retrofit.Builder()
-                                .baseUrl(b.baseURL)
-                                .addConverterFactory(ScalarsConverterFactory.create())
-                                .addConverterFactory(GsonConverterFactory.create())
-                                .build();
-
-                        final AllAPIs cr = retrofit.create(AllAPIs.class);
+                            Log.d("note", cId);
 
 
-                        Call<AssignHWbean> call3 = cr.assign_hw(b.school_id, cId, sId, ssId, sChapter, sNote, due_date.getText().toString(), studentId, body, b.user_id);
 
-                        progress.setVisibility(View.VISIBLE);
+                            JSONArray jsonArray = new JSONArray();
 
-                        Log.d("outputtt", String.valueOf(sNote));
-                        call3.enqueue(new Callback<AssignHWbean>() {
+                            for (int i=0;i<studentId.size();i++){
+                                JSONObject object =new JSONObject();
 
-                            @Override
-                            public void onResponse(Call<AssignHWbean> call3, Response<AssignHWbean> response) {
-
-
-                             /*  if (response.body().getStatus().equals("1")){
-                                   Toast.makeText(getActivity(), "Home Work Added successfully", Toast.LENGTH_SHORT).show();
-                               }
-                               else {
-                                   Toast.makeText(getActivity(), "Some Error occurred. Try Again!", Toast.LENGTH_SHORT).show();
-                               }*/
-
-                                Log.d("yooooo", response.body().getStatus());
-
-
+                                try {
+                                    object.put("Id",studentId.get(i));
+                                    jsonArray.put(object);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
 
-                            @Override
-                            public void onFailure(Call<AssignHWbean> call3, Throwable throwable) {
-                                progress.setVisibility(View.GONE);
+                            JSONObject jsonObject=new JSONObject();
+                            try {
+                                jsonObject.put("student",jsonArray);
 
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        });
+                            Log.d("dsds",jsonObject.toString());
+
+                            File file = new File(mCurrentPhotoPath);
+                            final User b = (User) getActivity().getApplicationContext();
+
+                            RequestBody reqFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+                            MultipartBody.Part body = MultipartBody.Part.createFormData("attach", file.getName(), reqFile);
+
+
+                            Retrofit retrofit = new Retrofit.Builder()
+                                    .baseUrl(b.baseURL)
+                                    .addConverterFactory(ScalarsConverterFactory.create())
+                                    .addConverterFactory(GsonConverterFactory.create())
+                                    .build();
+
+                            final AllAPIs cr = retrofit.create(AllAPIs.class);
+
+
+                            Call<AssignHWbean> call3 = cr.assign_hw(b.school_id, cId, sId, ssId, sChapter, sNote, due_date.getText().toString(), studentId, body, b.user_id);
+
+                            progress.setVisibility(View.VISIBLE);
+
+                            Log.d("outputtt", String.valueOf(sId));
+                            call3.enqueue(new Callback<AssignHWbean>() {
+
+                                @Override
+                                public void onResponse(Call<AssignHWbean> call3, Response<AssignHWbean> response) {
+
+
+                                    if (response.body().getStatus().equals("1")) {
+                                        Toast.makeText(getContext(), "Home Work Added Successfully.", Toast.LENGTH_LONG).show();
+                                        note.setText(" ");
+                                    } else {
+                                        Toast.makeText(getContext(), "Home work did not added Successfully!", Toast.LENGTH_LONG).show();
+                                    }
+                                    progress.setVisibility(View.GONE);
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<AssignHWbean> call3, Throwable throwable) {
+                                    Log.d("yooooo", "sds");
+                                    progress.setVisibility(View.GONE);
+
+                                }
+                            });
+                        }else
+                            due_date.setError("Invalid date");
 
                         dialog.dismiss();
 
@@ -658,6 +745,7 @@ public class FrgmntOne extends Fragment {
                                 //Action for "Cancel".
                             }
                         });
+
 
                 final AlertDialog alert = dialog.create();
                 alert.show();
@@ -675,58 +763,135 @@ public class FrgmntOne extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && null != data) {
-            Uri selectedImg = data.getData();
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getActivity().getContentResolver().query(selectedImg,
-                    filePathColumn, null, null, null);
-            cursor.moveToFirst();
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            //  String picturePath = cursor.getString(columnIndex);
-            mCurrentPhotoPath = cursor.getString(columnIndex);
 
 
-            cursor.close();
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            try {
+                bmp = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), Uri.parse(String.valueOf(data.getData())));
+
+                //browse_image.setImageBitmap(bitmap);
+                Uri selectedImageUri = data.getData();
+
+                mCurrentPhotoPath = getPath(getActivity().getApplicationContext(), selectedImageUri);
+
+                //Log.d("asdasdasd", mCurrentPhotoPath);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
+
     }
 
 
-    /*public void updatepic() {
+    private static String getPath(final Context context, final Uri uri) {
+        final boolean isKitKatOrAbove = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
 
-        File file = new File(mCurrentPhotoPath);
-        final User b = (User) getActivity().getApplicationContext();
+        // DocumentProvider
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if (isKitKatOrAbove && DocumentsContract.isDocumentUri(context, uri)) {
+                // ExternalStorageProvider
+                if (isExternalStorageDocument(uri)) {
+                    final String docId = DocumentsContract.getDocumentId(uri);
+                    final String[] split = docId.split(":");
+                    final String type = split[0];
 
-        RequestBody reqFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+                    if ("primary".equalsIgnoreCase(type)) {
+                        return Environment.getExternalStorageDirectory() + "/" + split[1];
+                    }
 
-        MultipartBody.Part body = MultipartBody.Part.createFormData("attach", file.getName(), reqFile);
+                    // TODO handle non-primary volumes
+                }
+                // DownloadsProvider
+                else if (isDownloadsDocument(uri)) {
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(b.baseURL)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+                    final String id = DocumentsContract.getDocumentId(uri);
+                    final Uri contentUri = ContentUris.withAppendedId(
+                            Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
 
-        AllAPIs cr = retrofit.create(AllAPIs.class);
+                    return getDataColumn(context, contentUri, null, null);
+                }
+                // MediaProvider
+                else if (isMediaDocument(uri)) {
+                    final String docId = DocumentsContract.getDocumentId(uri);
+                    final String[] split = docId.split(":");
+                    final String type = split[0];
 
+                    Uri contentUri = null;
+                    if ("image".equals(type)) {
+                        contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                    } else if ("video".equals(type)) {
+                        contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                    } else if ("audio".equals(type)) {
+                        contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                    }
 
-        Call<AssignHWbean> call = cr.update_doctorprofile_pic(b.userId, body, "doctor");
+                    final String selection = "_id=?";
+                    final String[] selectionArgs = new String[]{
+                            split[1]
+                    };
 
-        call.enqueue(new Callback<AssignHWbean>() {
-            @Override
-            public void onResponse(Call<AssignHWbean> call, Response<AssignHWbean> response) {
-
-
-                progress.setVisibility(View.GONE);
+                    return getDataColumn(context, contentUri, selection, selectionArgs);
+                }
             }
-
-
-            @Override
-            public void onFailure(Call<AssignHWbean> call, Throwable throwable) {
-
-                progress.setVisibility(View.GONE);
+            // MediaStore (and general)
+            else if ("content".equalsIgnoreCase(uri.getScheme())) {
+                return getDataColumn(context, uri, null, null);
             }
-        });
-    }*/
+            // File
+            else if ("file".equalsIgnoreCase(uri.getScheme())) {
+                return uri.getPath();
+            }
+        }
+
+        return null;
+    }
+
+    private static boolean isExternalStorageDocument(Uri uri) {
+        return "com.android.externalstorage.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is DownloadsProvider.
+     */
+    private static boolean isDownloadsDocument(Uri uri) {
+        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is MediaProvider.
+     */
+    private static boolean isMediaDocument(Uri uri) {
+        return "com.android.providers.media.documents".equals(uri.getAuthority());
+    }
+
+    private static String getDataColumn(Context context, Uri uri, String selection,
+                                        String[] selectionArgs) {
+
+        Cursor cursor = null;
+        final String column = "_data";
+        final String[] projection = {
+                column
+        };
+
+        try {
+            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs,
+                    null);
+            if (cursor != null && cursor.moveToFirst()) {
+                final int column_index = cursor.getColumnIndexOrThrow(column);
+                return cursor.getString(column_index);
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return null;
+    }
 
 
     @SuppressLint("ValidFragment")

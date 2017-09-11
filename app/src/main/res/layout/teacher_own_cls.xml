@@ -1418,7 +1418,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="43"
+                    android:text=" "
+                    android:id="@+id/totalStudent"
                     android:textColor="#000000"
                     android:textSize="32sp"
                     android:textStyle="bold" />
@@ -1459,7 +1460,8 @@
                     <TextView
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
-                        android:text="40"
+                        android:text=" "
+                        android:id="@+id/passStudent"
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textSize="20sp"
@@ -1487,7 +1489,8 @@
                     <TextView
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
-                        android:text="03"
+                        android:text=" "
+                        android:id="@+id/failStudent"
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textSize="20sp"
@@ -1498,7 +1501,12 @@
         </LinearLayout>
     </LinearLayout>
 
-
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 
 
 </android.support.design.widget.CoordinatorLayout>

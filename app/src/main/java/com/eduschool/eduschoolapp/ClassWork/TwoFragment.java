@@ -98,7 +98,7 @@ public class TwoFragment extends Fragment {
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View To) {
                 android.app.FragmentManager fm = getActivity().getFragmentManager();
                 com.eduschool.eduschoolapp.ClassWork.FilterDailog ratingBarFragment = new com.eduschool.eduschoolapp.ClassWork.FilterDailog();
                 ratingBarFragment.show(fm, "dialog");
@@ -181,25 +181,7 @@ public class TwoFragment extends Fragment {
         }
 
 
-
-      /*  card=(CardView)view.findViewById(R.id.card);
-
-        card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                TeacherHwFrgmntTwo frag1 = new TeacherHwFrgmntTwo();
-                ft.replace(R.id.replace, frag1);
-                ft.addToBackStack(null);
-                ft.commit();
-            }
-        });
-*/
-
-
-        /*button.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -236,14 +218,11 @@ public class TwoFragment extends Fragment {
                         classlist.clear();
                         classId.clear();
 
-                        for (int i = 0; i < list1.size(); i++) {
+                        for (int i = 0; i < response.body().getClassList().size(); i++) {
 
-                            if (list1.get(i).getClassName() != null && list1.get(i).getClassId() != null) {
+                            classlist.add(response.body().getClassList().get(i).getClassName());
 
-                                classlist.add(list1.get(i).getClassName());
-                                classId.add(list1.get(i).getClassId());
-                            }
-
+                            classId.add(response.body().getClassList().get(i).getClassId());
                         }
 
                         ArrayAdapter<String> adp1 = new ArrayAdapter<String>(getContext(),
@@ -281,16 +260,9 @@ public class TwoFragment extends Fragment {
 
                 className.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, final int i, long l) {
-*//*
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                        isFirst = true;
-
-                        if (i > 0) {
-
-                            isFirst = false;
-*//*
-
+                        cId = classId.get(i);
 
                         Retrofit retrofit = new Retrofit.Builder()
                                 .baseUrl(b.baseURL)
@@ -330,7 +302,6 @@ public class TwoFragment extends Fragment {
                                 sectionName.setAdapter(adp);
 
 
-                                cId = classId.get(i);
                                 Log.d("Cid", String.valueOf(cId));
 
                                 progress.setVisibility(View.GONE);
@@ -345,50 +316,7 @@ public class TwoFragment extends Fragment {
                         });
 
 
-                        Call<SubjectListBean> call1 = cr.subjectList(b.school_id, classId.get(i));
 
-                        progress.setVisibility(View.VISIBLE);
-
-                        call1.enqueue(new Callback<SubjectListBean>() {
-
-                            @Override
-                            public void onResponse(Call<SubjectListBean> call, Response<SubjectListBean> response) {
-
-                                listSubject = response.body().getSubjectList();
-                                subjectlist.clear();
-                                subjectId.clear();
-
-
-                                for (int i = 0; i < response.body().getSubjectList().size(); i++) {
-
-                                    subjectlist.add(response.body().getSubjectList().get(i).getSubjectName());
-                                    subjectId.add(response.body().getSubjectList().get(i).getSubjectId());
-                                }
-
-                                ArrayAdapter<String> adp = new ArrayAdapter<String>(getContext(),
-                                        android.R.layout.simple_list_item_1, subjectlist);
-
-                                adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-                                subjectName.setAdapter(adp);
-                                progress.setVisibility(View.GONE);
-
-                                ssId = subjectId.get(i);
-
-
-                            }
-
-                            @Override
-                            public void onFailure(Call<SubjectListBean> call, Throwable throwable) {
-                                progress.setVisibility(View.GONE);
-
-                            }
-                        });
-
-
-                       *//* } else {
-                            isFirst = true;
-                        }*//*
 
                     }
 
@@ -403,14 +331,14 @@ public class TwoFragment extends Fragment {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, final int i, long l) {
 
-
+                        sId = sectionid.get(i);
                         Retrofit retrofit = new Retrofit.Builder()
                                 .baseUrl(b.baseURL)
                                 .addConverterFactory(ScalarsConverterFactory.create())
                                 .addConverterFactory(GsonConverterFactory.create())
                                 .build();
 
-                        AllAPIs cr = retrofit.create(AllAPIs.class);
+                        final AllAPIs cr = retrofit.create(AllAPIs.class);
 
                         Call<SectionListbean> call2 = cr.sectionList(b.school_id, classId.get(i));
 
@@ -422,13 +350,45 @@ public class TwoFragment extends Fragment {
                             @Override
                             public void onResponse(Call<SectionListbean> call, Response<SectionListbean> response) {
 
+                                Call<SubjectListBean> call1 = cr.subjectList(b.school_id, classId.get(i),sectionid.get(i));
 
-                                for (int i = 0; i < response.body().getSectionList().size(); i++) {
+                                progress.setVisibility(View.VISIBLE);
+
+                                call1.enqueue(new Callback<SubjectListBean>() {
+
+                                    @Override
+                                    public void onResponse(Call<SubjectListBean> call, Response<SubjectListBean> response) {
+
+                                        listSubject = response.body().getSubjectList();
+                                        subjectlist.clear();
+                                        subjectId.clear();
 
 
-                                }
-                                Log.d("section", String.valueOf(sectionid.get(i)));
-                                sId = sectionid.get(i);
+                                        for (int i = 0; i < response.body().getSubjectList().size(); i++) {
+
+                                            subjectlist.add(response.body().getSubjectList().get(i).getSubjectName());
+                                            subjectId.add(response.body().getSubjectList().get(i).getSubjectId());
+                                        }
+
+                                        ArrayAdapter<String> adp = new ArrayAdapter<String>(getContext(),
+                                                android.R.layout.simple_list_item_1, subjectlist);
+
+                                        adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                                        subjectName.setAdapter(adp);
+                                        progress.setVisibility(View.GONE);
+
+
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<SubjectListBean> call, Throwable throwable) {
+                                        progress.setVisibility(View.GONE);
+
+                                    }
+                                });
+
+
 
                                 progress.setVisibility(View.GONE);
 
@@ -454,35 +414,10 @@ public class TwoFragment extends Fragment {
 
                 subjectName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, final int i, long l) {
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                        Call<SubjectListBean> call1 = cr.subjectList(b.school_id, classId.get(i));
+                        ssId = subjectId.get(i);
 
-                        progress.setVisibility(View.VISIBLE);
-
-                        call1.enqueue(new Callback<SubjectListBean>() {
-
-                            @Override
-                            public void onResponse(Call<SubjectListBean> call, Response<SubjectListBean> response) {
-
-                                for (int i = 0; i < response.body().getSubjectList().size(); i++) {
-
-
-                                }
-
-
-                                progress.setVisibility(View.GONE);
-
-                                ssId = subjectId.get(i);
-                                Log.d("subject",ssId);
-                            }
-
-                            @Override
-                            public void onFailure(Call<SubjectListBean> call, Throwable throwable) {
-                                progress.setVisibility(View.GONE);
-
-                            }
-                        });
                     }
 
                     @Override
@@ -513,26 +448,24 @@ public class TwoFragment extends Fragment {
                             progress.setVisibility(View.VISIBLE);
                             Log.d("iddd", String.valueOf(sId));
 
-                            Call<HomewrkListbean> call = cr.homwwrk_list(b.school_id, b.user_id, cId, sId, ssId);
+                            Call<ClassWrkListbean> call = cr.classwrk_list(b.school_id, b.user_id, cId, sId, ssId);
 
-                            call.enqueue(new Callback<HomewrkListbean>() {
+                            call.enqueue(new Callback<ClassWrkListbean>() {
                                 @Override
-                                public void onResponse(Call<HomewrkListbean> call, Response<HomewrkListbean> response) {
+                                public void onResponse(Call<ClassWrkListbean> call, Response<ClassWrkListbean> response) {
 
 
                                     dialog.dismiss();
                                     progress.setVisibility(View.GONE);
-
-                                    adapter.setGridData(response.body().getHomeworkList());
+                                    adapter.setGridData(response.body().getClassworkList());
                                     adapter.notifyDataSetChanged();
-
                                     isSearch = true;
                                     onResume();
 
                                 }
 
                                 @Override
-                                public void onFailure(Call<HomewrkListbean> call, Throwable throwable) {
+                                public void onFailure(Call<ClassWrkListbean> call, Throwable throwable) {
                                     progress.setVisibility(View.GONE);
 
                                 }
@@ -545,7 +478,8 @@ public class TwoFragment extends Fragment {
 
                 dialog.show();
             }
-        });*/
+        });
+
 
         return view;
 
@@ -592,9 +526,8 @@ public class TwoFragment extends Fragment {
             });
 
 
-        } /*else {
+        } else {
             Log.d("elseSearchh", String.valueOf(isSearch));
-
             final User b = (User) getActivity().getApplicationContext();
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(b.baseURL)
@@ -605,25 +538,22 @@ public class TwoFragment extends Fragment {
             AllAPIs cr = retrofit.create(AllAPIs.class);
 
             progress.setVisibility(View.VISIBLE);
+            Log.d("iddd", String.valueOf(sId));
 
             Call<ClassWrkListbean> call = cr.classwrk_list(b.school_id, b.user_id, cId, sId, ssId);
 
-            call.enqueue(new Callback<HomewrkListbean>() {
+            call.enqueue(new Callback<ClassWrkListbean>() {
                 @Override
-                public void onResponse(Call<ClassworkList> call, Response<ClassworkList> response) {
+                public void onResponse(Call<ClassWrkListbean> call, Response<ClassWrkListbean> response) {
 
                     progress.setVisibility(View.GONE);
-
-                    adapter.setGridData(response.body().getHomeworkList());
+                    adapter.setGridData(response.body().getClassworkList());
                     adapter.notifyDataSetChanged();
-
-                    Log.d("sdcscs", "sssssss");
-
 
                 }
 
                 @Override
-                public void onFailure(Call<HomewrkListbean> call, Throwable throwable) {
+                public void onFailure(Call<ClassWrkListbean> call, Throwable throwable) {
                     progress.setVisibility(View.GONE);
 
                 }
@@ -631,7 +561,7 @@ public class TwoFragment extends Fragment {
 
 
         }
-*/    }
+    }
 
 
 }

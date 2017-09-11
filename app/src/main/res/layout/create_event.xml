@@ -1,214 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroud_color">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="55dp">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp"
-            android:layout_marginTop="12dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/date1"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/viewattendance"
-                android:padding="12dp">
+                android:layout_marginBottom="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginTop="12dp">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/date1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/viewattendance"
+                    android:padding="12dp">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="12dp"
-                        android:src="@drawable/ic_calendar" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <TextView
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="12dp"
+                            android:src="@drawable/ic_calendar" />
 
-                        android:id="@+id/tv_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_centerVertical="true"
-                        android:text="Start Date" />
-                </RelativeLayout>
+                        <TextView
+
+                            android:id="@+id/tv_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_centerVertical="true"
+                            android:text="Start Date" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/date2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/viewattendance"
+                    android:padding="12dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="12dp"
+                            android:src="@drawable/ic_calendar" />
+
+                        <TextView
+
+                            android:id="@+id/tv_date1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_centerVertical="true"
+                            android:text="End Date" />
+                    </RelativeLayout>
+                </LinearLayout>
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/date2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/viewattendance"
-                android:padding="12dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="12dp"
-                        android:src="@drawable/ic_calendar" />
-
-                    <TextView
-
-                        android:id="@+id/tv_date1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_centerVertical="true"
-                        android:text="End Date" />
-                </RelativeLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp"
-            android:layout_marginTop="6dp">
 
 
             <LinearLayout
-                android:id="@+id/time"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/viewattendance"
-                android:padding="10dp">
+                android:layout_marginBottom="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginTop="6dp">
+
+
+                <LinearLayout
+                    android:id="@+id/time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/viewattendance"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="100dp"
+                            android:src="@drawable/clock" />
+
+                        <TextView
+
+                            android:id="@+id/tv_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_centerVertical="true"
+                            android:layout_weight="1"
+                            android:text="Time"
+                            android:textAlignment="center" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginTop="6dp">
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:background="@drawable/background"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:text="Type of Event" />
 
                 <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/viewattendance"
+                    android:padding="8dp">
 
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="100dp"
-                        android:src="@drawable/clock" />
-
-                    <TextView
-
-                        android:id="@+id/tv_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_centerVertical="true"
-                        android:layout_weight="1"
-                        android:text="Time"
-                        android:textAlignment="center" />
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"></Spinner>
                 </RelativeLayout>
             </LinearLayout>
 
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp"
-            android:layout_marginTop="6dp">
 
             <TextView
-                android:id="@+id/textView10"
-                android:layout_width="0dp"
+                android:id="@+id/className"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:background="@drawable/background"
-                android:gravity="center"
-                android:padding="12dp"
-                android:text="Type of Event" />
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_margin="6dp"
                 android:background="@drawable/viewattendance"
-                android:padding="8dp">
+                android:hint="Class"
+                android:padding="12dp"
+                android:textSize="18dp" />
 
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></Spinner>
-            </RelativeLayout>
+            <TextView
+                android:id="@+id/sectonName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:background="@drawable/viewattendance"
+                android:hint="Section"
+                android:padding="12dp"
+                android:textSize="18dp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginTop="6dp"
+                android:padding="6dp"
+                android:text="Additional Details"
+                android:textSize="16dp" />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:background="@drawable/viewattendance"
+                android:gravity="top|left"
+                android:hint="Enter Note"
+                android:lines="7"
+                android:paddingStart="12dp"
+                android:paddingTop="4dp"
+                android:textColorHint="#c9c8c8"
+
+
+                />
         </LinearLayout>
-
-
-        <TextView
-            android:id="@+id/className"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/viewattendance"
-            android:padding="12dp"
-            android:hint="Class"
-            android:layout_margin="6dp"
-            android:textColorHint="#c9c8c8"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/sectonName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:background="@drawable/viewattendance"
-            android:padding="12dp"
-            android:hint="Section"
-            android:textColorHint="#c9c8c8"
-            android:textSize="18dp" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp"
-            android:layout_marginTop="6dp"
-            android:padding="6dp"
-            android:text="Additional Details"
-            android:textSize="16dp" />
-
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:background="@drawable/viewattendance"
-            android:gravity="top|left"
-            android:hint="Enter Note"
-            android:lines="7"
-            android:textColorHint="#c9c8c8"
-            android:paddingStart="12dp"
-            android:paddingTop="4dp"
-
-
-            />
-    </LinearLayout>
     </ScrollView>
 
     <Button
@@ -216,7 +216,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/viewattendance1"
+        android:background="@drawable/buton_background"
         android:text="Create"
         android:textColor="#fff" />
 

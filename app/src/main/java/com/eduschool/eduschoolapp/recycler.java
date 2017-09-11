@@ -67,7 +67,7 @@ public class recycler extends AppCompatActivity {
 
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View To) {
 
                     Intent intent = new Intent(recycler.this, New.class);
                     intent.putExtra("selected_image", android_image_urls);

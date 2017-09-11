@@ -57,7 +57,7 @@ public class OnlineTestActivity extends AppCompatActivity {
 
 
         final Dialog dialog = new Dialog(OnlineTestActivity.this);
-        dialog.setCancelable(true);
+        dialog.setCancelable(false);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.online_test_dailog);
 

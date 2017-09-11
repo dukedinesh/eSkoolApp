@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@drawable/backgroud_color"
     android:orientation="vertical">
 
     <ScrollView
@@ -23,8 +23,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
                     android:layout_marginTop="20dp">
 
                     <LinearLayout
@@ -32,6 +32,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="2"
+                        android:gravity="center"
                         android:background="@drawable/background"
                         android:orientation="vertical"
                         android:padding="12dp">
@@ -40,7 +41,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="8A"
+                            android:text=" "
+                            android:id="@+id/classSection"
                             android:textColor="#398DBF"
                             android:textSize="32sp"
                             android:textStyle="bold" />
@@ -50,6 +52,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="10 March 2017"
+                            android:id="@+id/date"
                             android:textColor="#000000" />
                     </LinearLayout>
 
@@ -66,7 +69,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:paddingLeft="8dp"
-                            android:text="BIOLOGY"
+                            android:text=" "
+                            android:id="@+id/subject"
                             android:textColor="#000000"
                             android:textSize="32sp"
                             android:textStyle="bold" />
@@ -77,20 +81,21 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/viewattendance1"
                     android:padding="12dp"
-                    android:text="Biology_08-Mar-17_Chapter Water Plants"
+                    android:id="@+id/title"
+                    android:text="  "
                     android:textColor="#ffffff" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
                     android:layout_marginTop="3dp"
                     android:background="@drawable/viewattendance"
                     android:orientation="horizontal">
@@ -111,7 +116,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:padding="12dp"
-                        android:text="(10-March-2017)"
+                        android:id="@+id/due_date"
+                        android:text="(  )"
                         android:textColor="#000000" />
 
 
@@ -120,20 +126,21 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
                     android:layout_marginTop="3dp"
                     android:background="@drawable/viewattendance"
                     android:minLines="4"
                     android:padding="12dp"
+                    android:id="@+id/note"
                     android:text="Extra Notes"
                     android:textColor="#000000" />
 
-                <LinearLayout
+                <!--<LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
                     android:layout_marginTop="3dp"
                     android:background="@drawable/viewattendance"
                     android:orientation="horizontal">
@@ -164,8 +171,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
                     android:layout_marginTop="3dp"
                     android:background="@drawable/viewattendance"
                     android:orientation="horizontal">
@@ -190,7 +197,7 @@
                         android:paddingRight="5dp"
                         android:paddingTop="4dp"
                         android:src="@drawable/download" />
-                </LinearLayout>
+                </LinearLayout>-->
             </LinearLayout>
 
             <RelativeLayout
@@ -201,18 +208,20 @@
 
         </LinearLayout>
     </ScrollView>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#fff"
-            android:text="COMPLETED"
-            android:background="@drawable/viewattendance1"
+            android:text="COMPLETE"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/buton_background"
             android:id="@+id/btn_complted"
             />
 
-    </RelativeLayout>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/progress"
+        android:visibility="gone"/>
 </RelativeLayout>

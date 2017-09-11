@@ -4,15 +4,29 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.eduschool.eduschoolapp.AllAPIs;
+import com.eduschool.eduschoolapp.ClassResultPOJO.ClassResultBean;
 import com.eduschool.eduschoolapp.Home.TeacherHome;
 import com.eduschool.eduschoolapp.R;
+import com.eduschool.eduschoolapp.ResultPOJO.ResultListBean;
 import com.eduschool.eduschoolapp.User;
+
+import org.w3c.dom.Text;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * Created by user on 5/20/2017.
@@ -21,6 +35,9 @@ import com.eduschool.eduschoolapp.User;
 public class TeacherOwnCls extends Fragment {
     Toolbar toolbar;
     TextView tvresult;
+    String id;
+    ProgressBar progress;
+    TextView totalStudent,passStudent,failStudent;
     private BottomSheetBehavior mBottomSheetBehavior1;
     public TeacherOwnCls() {
 
@@ -32,6 +49,21 @@ public class TeacherOwnCls extends Fragment {
 
         View view = inflater.inflate(R.layout.teacher_own_cls, container, false);
         toolbar = (Toolbar) ((TeacherHome) getContext()).findViewById(R.id.tool_bar);
+        toolbar.setNavigationIcon(R.drawable.back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FragmentManager fm= ((TeacherHome)getContext()).getSupportFragmentManager();
+                fm.popBackStack();
+            }
+        });
+        progress=(ProgressBar)view.findViewById(R.id.progress);
+        totalStudent=(TextView)view.findViewById(R.id.totalStudent);
+        passStudent=(TextView)view.findViewById(R.id.passStudent);
+        failStudent=(TextView)view.findViewById(R.id.failStudent);
+
+        id = getArguments().getString("message");
 
         final View bottomSheet1 = view.findViewById(R.id.bottom_sheet1);
         mBottomSheetBehavior1 = BottomSheetBehavior.from(bottomSheet1);
@@ -53,6 +85,68 @@ public class TeacherOwnCls extends Fragment {
                 }
             }
         });
+
+        User b = (User) getActivity().getApplicationContext();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(b.baseURL)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        AllAPIs cr = retrofit.create(AllAPIs.class);
+        progress.setVisibility(View.VISIBLE);
+
+        Call<ResultListBean> call = cr.result(b.school_id,b.user_class,b.user_section,id);
+
+        call.enqueue(new Callback<ResultListBean>() {
+            @Override
+            public void onResponse(Call<ResultListBean> call, Response<ResultListBean> response) {
+
+
+
+                progress.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onFailure(Call<ResultListBean> call, Throwable throwable) {
+
+                progress.setVisibility(View.GONE);
+
+            }
+        });
+
+
+
+        progress.setVisibility(View.VISIBLE);
+
+        Call<ClassResultBean> call1 = cr.class_result(b.school_id,b.user_class,b.user_section,id);
+
+        call1.enqueue(new Callback<ClassResultBean>() {
+            @Override
+            public void onResponse(Call<ClassResultBean> cal1, Response<ClassResultBean> response) {
+
+                totalStudent.setText(response.body().getClassResult().get(0).getTotalStudent().toString());
+                passStudent.setText(response.body().getClassResult().get(0).getTotalPassStudent().toString());
+                failStudent.setText(response.body().getClassResult().get(0).getTotalFailStudent().toString());
+
+
+                progress.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onFailure(Call<ClassResultBean> call, Throwable throwable) {
+
+                progress.setVisibility(View.GONE);
+
+            }
+        });
+
+
+
 
 
         return view;

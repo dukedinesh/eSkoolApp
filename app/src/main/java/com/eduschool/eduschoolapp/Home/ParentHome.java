@@ -57,7 +57,7 @@ public class ParentHome extends AppCompatActivity
     LinearLayout hotelName;
     SharedPreferences pref;
     SharedPreferences.Editor edit;
-    TextView academic, attendance, logout, home, notification, homewrk, classwrk, syllabus, exm, calendar, studentSummary, library, timeTable, gallery, sendCards, survey, stayAhead, onlineTest, raiseRequest, fees, transport, profile;
+    TextView academic,user_name, attendance, logout, home, notification, homewrk, classwrk, syllabus, exm, calendar, studentSummary, library, timeTable, gallery, sendCards, survey, stayAhead, onlineTest, raiseRequest, fees, transport, profile;
 
 
     @Override
@@ -126,7 +126,10 @@ public class ParentHome extends AppCompatActivity
         fees = (TextView) findViewById(R.id.fees);
         transport = (TextView) findViewById(R.id.transport);
         profile = (TextView) findViewById(R.id.profile);
+        user_name = (TextView) findViewById(R.id.user_name);
 
+        User b = (User) getApplicationContext();
+        user_name.setText("Welcome " +b.user_name);
 
         academic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,6 +201,7 @@ public class ParentHome extends AppCompatActivity
                 ParentAttendanceFrgmnt frag1 = new ParentAttendanceFrgmnt();
                 ft.replace(R.id.replace, frag1);
                 //ft.addToBackStack(null);
+                ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                 ft.commit();
 
                 drawer.closeDrawer(GravityCompat.START);
@@ -215,6 +219,7 @@ public class ParentHome extends AppCompatActivity
                 ParentHomeFrgmnt frag1 = new ParentHomeFrgmnt();
                 ft.replace(R.id.replace, frag1);
                 //ft.addToBackStack(null);
+                ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                 ft.commit();
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -230,6 +235,7 @@ public class ParentHome extends AppCompatActivity
                 ParentNotificationFrgmnt frag1 = new ParentNotificationFrgmnt();
                 ft.replace(R.id.replace, frag1);
                 //ft.addToBackStack(null);
+                ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                 ft.commit();
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -245,6 +251,7 @@ public class ParentHome extends AppCompatActivity
                 HomeWorkFrgmnt frag1 = new HomeWorkFrgmnt();
                 ft.replace(R.id.replace, frag1);
                 //ft.addToBackStack(null);
+                ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                 ft.commit();
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -260,6 +267,7 @@ public class ParentHome extends AppCompatActivity
                 ClassWorkFrgmnt frag1 = new ClassWorkFrgmnt();
                 ft.replace(R.id.replace, frag1);
                 //ft.addToBackStack(null);
+                ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                 ft.commit();
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -274,6 +282,7 @@ public class ParentHome extends AppCompatActivity
                 FragmentTransaction ft = fm.beginTransaction();
                 ParentAcademic frag1 = new ParentAcademic();
                 ft.replace(R.id.replace, frag1);
+                ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                 //ft.addToBackStack(null);
                 ft.commit();
                 drawer.closeDrawer(GravityCompat.START);
@@ -290,6 +299,7 @@ public class ParentHome extends AppCompatActivity
                 ExamFrgmntOne frag1 = new ExamFrgmntOne();
                 ft.replace(R.id.replace, frag1);
                 //ft.addToBackStack(null);
+                ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                 ft.commit();
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -305,6 +315,7 @@ public class ParentHome extends AppCompatActivity
                 HomeWorkFrgmnt frag1 = new HomeWorkFrgmnt();
                 ft.replace(R.id.replace, frag1);
                 //ft.addToBackStack(null);
+                ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                 ft.commit();
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -331,6 +342,7 @@ public class ParentHome extends AppCompatActivity
                 ParentLibrary1 frag1 = new ParentLibrary1();
                 ft.replace(R.id.replace, frag1);
                 //ft.addToBackStack(null);
+                ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                 ft.commit();
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -346,6 +358,7 @@ public class ParentHome extends AppCompatActivity
                 TimeTableParent frag1 = new TimeTableParent();
                 ft.replace(R.id.replace, frag1);
                 //ft.addToBackStack(null);
+                ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                 ft.commit();
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -360,6 +373,7 @@ public class ParentHome extends AppCompatActivity
                 FragmentTransaction ft = fm.beginTransaction();
                 GalleryParent frag1 = new GalleryParent();
                 ft.replace(R.id.replace, frag1);
+                ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                 //ft.addToBackStack(null);
                 ft.commit();
                 drawer.closeDrawer(GravityCompat.START);
@@ -375,6 +389,7 @@ public class ParentHome extends AppCompatActivity
                 FragmentTransaction ft = fm.beginTransaction();
                 WishingCardsFrgmnt frag1 = new WishingCardsFrgmnt();
                 ft.replace(R.id.replace, frag1);
+                ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                 //ft.addToBackStack(null);
                 ft.commit();
                 drawer.closeDrawer(GravityCompat.START);
@@ -390,6 +405,7 @@ public class ParentHome extends AppCompatActivity
                 FragmentTransaction ft = fm.beginTransaction();
                 SurveyFrgmntParent1 frag1 = new SurveyFrgmntParent1();
                 ft.replace(R.id.replace, frag1);
+                ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                 //ft.addToBackStack(null);
                 ft.commit();
                 drawer.closeDrawer(GravityCompat.START);
@@ -405,6 +421,7 @@ public class ParentHome extends AppCompatActivity
                 FragmentTransaction ft = fm.beginTransaction();
                 CalenderParent frag1 = new CalenderParent();
                 ft.replace(R.id.replace, frag1);
+                ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                 //ft.addToBackStack(null);
                 ft.commit();
                 drawer.closeDrawer(GravityCompat.START);
@@ -420,6 +437,7 @@ public class ParentHome extends AppCompatActivity
                 FragmentTransaction ft = fm.beginTransaction();
                 StayAheadHome frag1 = new StayAheadHome();
                 ft.replace(R.id.replace, frag1);
+                ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                 //ft.addToBackStack(null);
                 ft.commit();
                 drawer.closeDrawer(GravityCompat.START);
@@ -435,6 +453,7 @@ public class ParentHome extends AppCompatActivity
                 FragmentTransaction ft = fm.beginTransaction();
                 OnlineTestSummery frag1 = new OnlineTestSummery();
                 ft.replace(R.id.replace, frag1);
+                ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                 //ft.addToBackStack(null);
                 ft.commit();
                 drawer.closeDrawer(GravityCompat.START);
@@ -450,6 +469,7 @@ public class ParentHome extends AppCompatActivity
                 FragmentTransaction ft = fm.beginTransaction();
                 RaiseReqquestHome frag1 = new RaiseReqquestHome();
                 ft.replace(R.id.replace, frag1);
+                ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                 //ft.addToBackStack(null);
                 ft.commit();
                 drawer.closeDrawer(GravityCompat.START);
@@ -465,6 +485,7 @@ public class ParentHome extends AppCompatActivity
                 FragmentTransaction ft = fm.beginTransaction();
                 Fees frag1 = new Fees();
                 ft.replace(R.id.replace, frag1);
+                ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                 //ft.addToBackStack(null);
                 ft.commit();
                 drawer.closeDrawer(GravityCompat.START);
@@ -480,6 +501,7 @@ public class ParentHome extends AppCompatActivity
                 FragmentTransaction ft = fm.beginTransaction();
                 TransportParent frag1 = new TransportParent();
                 ft.replace(R.id.replace, frag1);
+                ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                 //ft.addToBackStack(null);
                 ft.commit();
                 drawer.closeDrawer(GravityCompat.START);
@@ -495,6 +517,7 @@ public class ParentHome extends AppCompatActivity
                 FragmentTransaction ft = fm.beginTransaction();
                 ParentProfile frag1 = new ParentProfile();
                 ft.replace(R.id.replace, frag1);
+                ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                 //ft.addToBackStack(null);
                 ft.commit();
                 drawer.closeDrawer(GravityCompat.START);

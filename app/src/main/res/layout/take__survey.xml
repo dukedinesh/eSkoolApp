@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/backgroud_color"
     tools:context="com.eduschool.eduschoolapp.Survey.Take_Survey">
 
     <LinearLayout
@@ -39,54 +40,29 @@
                 android:layout_marginBottom="22dp"
                 android:layout_marginLeft="6dp"
                 android:padding="6dp"
-                android:text="Q. Mauris vel feugiat enim. Ut in rhoncus est. Fusce in ex vitae magna auctor semper et in nisl. Cras in rhoncus mauris. Nullam scelerisque ligula eget nibh dictum tristique. In dignissim quam nec diam lobortis aliquam. Nulla at mi bibendum, sollicitudin diam pharetra, scelerisque est?"
+                android:id="@+id/qus"
+                android:text="Q. "
                 android:textColor="#000"
                 android:textSize="18sp" />
 
 
             <RadioGroup
-                android:id="@+id/radioSex"
+                android:id="@+id/radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 >
-
-                <RadioButton
-                    android:id="@+id/radioMale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:checked="true"
-                    android:padding="4dp"
-                    android:text="perspiciatis"
-                    android:textSize="18sp" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:padding="4dp"
-                    android:text="omnis"
-                    android:textSize="18sp" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:padding="4dp"
-                    android:text="accum"
-                    android:textSize="18sp" />
-
-                <RadioButton
-                    android:id="@+id/radioFemale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:padding="4dp"
-                    android:text="site"
-                    android:textSize="18sp" />
-
             </RadioGroup>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" "
+                android:id="@+id/ans"
+                android:visibility="gone"
+                android:textSize="18sp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginTop="12dp"
+                android:textColor="#000"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -94,8 +70,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/viewattendance1"
+        android:background="@drawable/buton_background"
         android:text="SUBMIT"
         android:textColor="#fff"
         android:id="@+id/submit"/>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
 </RelativeLayout>

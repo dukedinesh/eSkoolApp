@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ public class Frgmnt1 extends Fragment {
     Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    DrawerLayout drawer;
 
     public Frgmnt1() {
 
@@ -38,6 +41,7 @@ public class Frgmnt1 extends Fragment {
         View v = inflater.inflate(R.layout.communication_frgmnt1, container, false);
         toolbar = (Toolbar) ((TeacherHome) getContext()).findViewById(R.id.tool_bar);
         FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
+        drawer = (DrawerLayout) ((TeacherHome) getContext()).findViewById(R.id.drawer_asiana);
 
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +83,10 @@ public class Frgmnt1 extends Fragment {
     public void onResume() {
         super.onResume();
         toolbar.setTitle("Parent Request");
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
 
         User u = (User) getContext().getApplicationContext();
 

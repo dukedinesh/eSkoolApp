@@ -10,6 +10,7 @@ import java.util.List;
  */
 
 public class SubjectListBean {
+
     @SerializedName("subject_list")
     @Expose
     private List<SubjectList> subjectList = null;

@@ -10,6 +10,7 @@ import java.util.List;
  */
 
 public class HomewrkBean {
+
     @SerializedName("homework_data")
     @Expose
     private List<HomeworkDatum> homeworkData = null;
@@ -23,3 +24,4 @@ public class HomewrkBean {
     }
 
 }
+

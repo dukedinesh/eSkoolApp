@@ -9,22 +9,34 @@ import java.util.List;
  * Created by user on 8/2/2017.
  */
 
-public class HomeworkDatum {
+public class HomeworkDatum  {
     @SerializedName("homework_id")
     @Expose
     private String homeworkId;
     @SerializedName("title")
     @Expose
     private String title;
+    @SerializedName("class_id")
+    @Expose
+    private String classId;
     @SerializedName("class")
     @Expose
     private String _class;
+    @SerializedName("section_id")
+    @Expose
+    private String sectionId;
     @SerializedName("section")
     @Expose
     private String section;
+    @SerializedName("subject_id")
+    @Expose
+    private String subjectId;
     @SerializedName("subject")
     @Expose
     private String subject;
+    @SerializedName("chapter_id")
+    @Expose
+    private String chapterId;
     @SerializedName("chapter")
     @Expose
     private String chapter;
@@ -39,10 +51,16 @@ public class HomeworkDatum {
     private String notes;
     @SerializedName("total_student")
     @Expose
-    private List<TotalStudent> totalStudent = null;
+    private Integer totalStudent;
+    @SerializedName("total_completehomwork_student")
+    @Expose
+    private Integer totalCompletehomworkStudent;
     @SerializedName("completehomwork_student")
     @Expose
-    private List<String> completehomworkStudent = null;
+    private List<CompletehomworkStudent> completehomworkStudent = null;
+    @SerializedName("total_pendinghomwork_student")
+    @Expose
+    private Integer totalPendinghomworkStudent;
     @SerializedName("pendinghomwork_student")
     @Expose
     private List<PendinghomworkStudent> pendinghomworkStudent = null;
@@ -66,12 +84,28 @@ public class HomeworkDatum {
         this.title = title;
     }
 
+    public String getClassId() {
+        return classId;
+    }
+
+    public void setClassId(String classId) {
+        this.classId = classId;
+    }
+
     public String getClass_() {
         return _class;
     }
 
     public void setClass_(String _class) {
         this._class = _class;
+    }
+
+    public String getSectionId() {
+        return sectionId;
+    }
+
+    public void setSectionId(String sectionId) {
+        this.sectionId = sectionId;
     }
 
     public String getSection() {
@@ -82,12 +116,28 @@ public class HomeworkDatum {
         this.section = section;
     }
 
+    public String getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(String subjectId) {
+        this.subjectId = subjectId;
+    }
+
     public String getSubject() {
         return subject;
     }
 
     public void setSubject(String subject) {
         this.subject = subject;
+    }
+
+    public String getChapterId() {
+        return chapterId;
+    }
+
+    public void setChapterId(String chapterId) {
+        this.chapterId = chapterId;
     }
 
     public String getChapter() {
@@ -122,20 +172,36 @@ public class HomeworkDatum {
         this.notes = notes;
     }
 
-    public List<TotalStudent> getTotalStudent() {
+    public Integer getTotalStudent() {
         return totalStudent;
     }
 
-    public void setTotalStudent(List<TotalStudent> totalStudent) {
+    public void setTotalStudent(Integer totalStudent) {
         this.totalStudent = totalStudent;
     }
 
-    public List<String> getCompletehomworkStudent() {
+    public Integer getTotalCompletehomworkStudent() {
+        return totalCompletehomworkStudent;
+    }
+
+    public void setTotalCompletehomworkStudent(Integer totalCompletehomworkStudent) {
+        this.totalCompletehomworkStudent = totalCompletehomworkStudent;
+    }
+
+    public List<CompletehomworkStudent> getCompletehomworkStudent() {
         return completehomworkStudent;
     }
 
-    public void setCompletehomworkStudent(List<String> completehomworkStudent) {
+    public void setCompletehomworkStudent(List<CompletehomworkStudent> completehomworkStudent) {
         this.completehomworkStudent = completehomworkStudent;
+    }
+
+    public Integer getTotalPendinghomworkStudent() {
+        return totalPendinghomworkStudent;
+    }
+
+    public void setTotalPendinghomworkStudent(Integer totalPendinghomworkStudent) {
+        this.totalPendinghomworkStudent = totalPendinghomworkStudent;
     }
 
     public List<PendinghomworkStudent> getPendinghomworkStudent() {

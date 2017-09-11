@@ -52,6 +52,7 @@ public class RaiseReqquestHome extends Fragment {
 
         tabLayout.setupWithViewPager(viewPager);
 
+
         FloatingActionButton button = (FloatingActionButton) view.findViewById(R.id.fab);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,5 +113,6 @@ public class RaiseReqquestHome extends Fragment {
         User u = (User) getContext().getApplicationContext();
 
         u.back = true;
+
     }
 }

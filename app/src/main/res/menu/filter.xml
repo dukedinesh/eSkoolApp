@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" >
+
+
+    <item
+        android:id="@+id/action_filter"
+        android:title="edit"
+        android:orderInCategory="10"
+        android:icon="@drawable/edit"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_delete"
+        android:title="delete"
+        android:orderInCategory="9"
+        android:icon="@drawable/delete"
+        app:showAsAction="ifRoom" />
+
+
+
+</menu>

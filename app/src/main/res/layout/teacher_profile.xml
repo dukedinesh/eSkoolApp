@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroud_color">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="100dp"
-                    android:text="Sonam Gupta"
+                    android:text="   "
                     android:layout_marginBottom="5dp"
                     android:textColor="#fff"
                     android:textSize="20sp"
@@ -45,7 +46,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginLeft="12dp"
-                    android:src="@drawable/studentimage"
+                    android:src="@drawable/default_avatar"
 
                     />
 
@@ -86,7 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#F0920A"
+        android:background="@drawable/buton_background"
         android:padding="18dp"
         android:text="Change Password"
         android:textColor="#ffffff" />

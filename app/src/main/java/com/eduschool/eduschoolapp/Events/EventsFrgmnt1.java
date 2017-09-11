@@ -1,5 +1,6 @@
 package com.eduschool.eduschoolapp.Events;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -50,13 +51,17 @@ public class EventsFrgmnt1 extends Fragment {
         create_event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+/*
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 CreateEventFrgmnt frag1 = new CreateEventFrgmnt();
                 ft.replace(R.id.replace, frag1);
                 ft.addToBackStack(null);
-                ft.commit();
+                ft.commit()*/;
+
+                Intent intent=new Intent(getActivity(),CreateEventFrgmnt.class);
+                startActivity(intent);
+
             }
         });
 

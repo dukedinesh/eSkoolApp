@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,15 @@ public class Frgmnt2 extends Fragment {
 
         View v = inflater.inflate(R.layout.communication_frgmnt2, container, false);
         toolbar = (Toolbar) ((TeacherHome) getContext()).findViewById(R.id.tool_bar);
+        toolbar.setNavigationIcon(R.drawable.back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FragmentManager fm= ((TeacherHome)getContext()).getSupportFragmentManager();
+                fm.popBackStack();
+            }
+        });
 
         birthday=(TextView)v.findViewById(R.id.birthday);
         compose_msg=(TextView)v.findViewById(R.id.compose_msg);

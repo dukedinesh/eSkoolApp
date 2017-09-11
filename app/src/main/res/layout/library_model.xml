@@ -12,6 +12,7 @@
         android:layout_gravity="center"
         android:background="#F5F5F5"
         card_view:cardCornerRadius="4dp"
+
         card_view:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -48,6 +49,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="William Shakespeare"
+                        android:id="@+id/author"
                         android:textSize="12dp" />
                 </LinearLayout>
 
@@ -69,6 +71,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="6dp"
                         android:text="10045"
+                        android:id="@+id/book_no"
                         android:textSize="12dp" />
                 </LinearLayout>
 
@@ -81,8 +84,10 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true">
-
+                    android:orientation="horizontal"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/layout">
+<!--
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -100,7 +105,7 @@
                         android:padding="6dp"
                         android:gravity="center"
                         android:text="Drama"
-                        android:textSize="12dp" />
+                        android:textSize="12dp" />-->
                 </LinearLayout>
 
 
@@ -112,6 +117,7 @@
                     android:layout_margin="6dp"
                     android:padding="6dp"
                     android:gravity="center"
+                    android:id="@+id/status"
                     android:text="Available"
                     android:background="@drawable/lib2"
                     android:textSize="12dp" />

@@ -2,27 +2,30 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@drawable/backgroud_color"
     android:focusable="true"
     android:clickable="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/progress">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginTop="20dp">
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="12dp">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="2"
+                android:gravity="center"
                 android:background="@drawable/background"
                 android:orientation="vertical"
                 android:padding="12dp">
@@ -32,8 +35,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="8A"
+                    android:gravity="center"
+                    android:id="@+id/classSection"
                     android:textColor="#398DBF"
-                    android:textSize="32sp"
+                    android:textSize="28sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -41,6 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="10 March 2017"
+                    android:id="@+id/date"
                     android:textColor="#000000" />
             </LinearLayout>
 
@@ -57,19 +63,21 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:paddingLeft="8dp"
-                    android:text="BIOLOGY"
+                    android:text=""
+                    android:id="@+id/subject"
                     android:textColor="#000000"
-                    android:textSize="32sp"
+                    android:textSize="28sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/viewattendance1"
             android:padding="12dp"
@@ -80,8 +88,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="3dp"
             android:background="@drawable/viewattendance"
             android:orientation="horizontal">
@@ -101,6 +109,8 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:padding="12dp"
+                android:textColor="#000000"
+                android:id="@+id/status"
                 android:text="Reading" />
 
 
@@ -109,12 +119,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="3dp"
             android:background="@drawable/viewattendance"
             android:minLines="8"
+            android:textColor="#000000"
             android:padding="12dp"
+            android:id="@+id/note"
             android:text="Sample Questions/Extra Notes " />
 
 
@@ -125,8 +137,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#F0920A"
+        android:background="@drawable/buton_background"
         android:padding="18dp"
         android:text="EDIT"
         android:textColor="#fff" />
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/progress"
+        android:visibility="gone"/>
 </RelativeLayout>

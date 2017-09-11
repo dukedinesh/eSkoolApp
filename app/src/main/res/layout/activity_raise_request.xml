@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backgroud_color"
     android:orientation="vertical"
     tools:context="com.eduschool.eduschoolapp.RaiseRequest.RaiseRequestActivity">
 
@@ -36,9 +37,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="22dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/viewattendance"
                 android:orientation="vertical"
                 android:padding="22dp">
@@ -61,62 +62,115 @@
                         android:layout_height="wrap_content" />
                 </RelativeLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:layout_marginTop="12dp"
-                    android:text="Request Dates"
-                    android:textSize="18dp" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/start"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/viewattendance"
-                        android:drawablePadding="10dp"
-                        android:drawableStart="@drawable/calendar"
-                        android:gravity="center_vertical"
-                        android:padding="12dp"
-                        android:text="Start Date" />
-
-                    <TextView
-                        android:id="@+id/end"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:background="@drawable/viewattendance"
-                        android:drawablePadding="10dp"
-                        android:drawableStart="@drawable/calendar"
-                        android:gravity="center_vertical"
-                        android:padding="12dp"
-                        android:text="End Date" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:layout_marginTop="12dp"
-                    android:text="Reason"
-                    android:textSize="18dp" />
+                    android:orientation="vertical"
+                    android:id="@+id/layout1">
 
-                <RelativeLayout
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginTop="12dp"
+                        android:text="Request Dates"
+                        android:textSize="18dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/start"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/viewattendance"
+                            android:drawablePadding="10dp"
+                            android:drawableStart="@drawable/calendar"
+                            android:gravity="center_vertical"
+                            android:padding="12dp"
+                            android:text="Start Date" />
+
+                        <TextView
+                            android:id="@+id/end"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:background="@drawable/viewattendance"
+                            android:drawablePadding="10dp"
+                            android:drawableStart="@drawable/calendar"
+                            android:gravity="center_vertical"
+                            android:padding="12dp"
+                            android:text="End Date" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginTop="12dp"
+                        android:text="Reason"
+                        android:textSize="18dp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background">
+
+                        <Spinner
+                            android:id="@+id/reaason"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/background">
+                    android:orientation="vertical"
+                    android:id="@+id/layout2"
+                    android:visibility="gone">
 
-                    <Spinner
-                        android:id="@+id/reaason"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginTop="12dp"
+                        android:text="Query"
+                        android:textSize="18dp" />
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </RelativeLayout>
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background">
+
+                        <Spinner
+                            android:id="@+id/query"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginTop="12dp"
+                        android:text="Select Type of Exam"
+                        android:textSize="18dp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background">
+
+                        <Spinner
+                            android:id="@+id/exm_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </RelativeLayout>
+
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
@@ -124,11 +178,19 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/send"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#F0920A"
+        android:background="@drawable/buton_background"
         android:padding="18dp"
         android:text="SEND"
         android:textColor="#ffffff" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 </RelativeLayout>

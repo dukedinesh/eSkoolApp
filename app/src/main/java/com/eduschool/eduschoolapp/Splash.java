@@ -86,10 +86,15 @@ public class Splash extends AppCompatActivity {
                                     } else if (Objects.equals(response.body().getStatus(), "1")) {
                                         b.school_id = response.body().getSchoolId();
                                         b.user_id = response.body().getId();
+                                        b.user_name = response.body().getTeacherName();
                                         b.user_type = response.body().getUserType();
+                                        b.user_class = response.body().getClassId();
+                                        b.user_section = response.body().getSectionId();
+                                        b.class_teacher = response.body().getClassTeacher();
+                                        b.class_Name = response.body().getClassName();
+                                        b.section_Name = response.body().getSectionName();
 
                                         progress.setVisibility(View.GONE);
-
 
                                         Intent intent = new Intent(Splash.this, TeacherHome.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -155,6 +160,12 @@ public class Splash extends AppCompatActivity {
                                         b.school_id = response.body().getSchoolId();
                                         b.user_id = response.body().getId();
                                         b.user_type = response.body().getUserType();
+                                        b.user_name = response.body().getStudentName();
+                                        b.user_class = response.body().getClassId();
+                                        b.user_section = response.body().getSectionId();
+                                        b.class_Name = response.body().getClassName();
+                                        b.section_Name = response.body().getSectionName();
+
 
                                         progress.setVisibility(View.GONE);
 

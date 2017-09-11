@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="12dp"
+    android:background="@drawable/backgroud_color"
     android:orientation="vertical"
     android:padding="12dp">
 
@@ -41,7 +42,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="8th" />
+                        android:text=" " />
                 </LinearLayout>
 
                 <LinearLayout
@@ -61,7 +62,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="A" />
+                        android:text=" " />
                 </LinearLayout>
 
                 <LinearLayout
@@ -81,7 +82,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Female" />
+                        android:text=" " />
                 </LinearLayout>
 
                 <LinearLayout
@@ -101,7 +102,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="12" />
+                        android:text=" " />
                 </LinearLayout>
 
                 <LinearLayout
@@ -121,7 +122,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="12345" />
+                        android:text=" " />
                 </LinearLayout>
 
                 <LinearLayout
@@ -133,35 +134,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Contact No."
+                        android:text="Category"
                         android:textStyle="bold"/>
 
                     <TextView
-                        android:id="@+id/contactNo"
+                        android:id="@+id/category"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="+918826601886" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Description"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:id="@+id/description"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="N/A" />
+                        android:text=" " />
                 </LinearLayout>
 
                 <LinearLayout
@@ -177,10 +158,31 @@
                         android:textStyle="bold"/>
 
                     <TextView
+                        android:id="@+id/bdy"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="03-Sep-1990" />
+                        android:text="  " />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Blood Group"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=" "
+                        android:id="@+id/bloodGrp"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

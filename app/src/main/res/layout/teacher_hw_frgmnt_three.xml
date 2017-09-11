@@ -1,194 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#ffffff"
-    android:clickable="true">
+    android:background="@drawable/backgroud_color"
+    android:clickable="true"
+    android:orientation="vertical">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="20dp">
+        android:layout_marginBottom="22dp">
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="2"
-            android:background="@drawable/background"
-            android:orientation="vertical"
-            android:padding="12dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="8A"
-                android:textColor="#398DBF"
-                android:textSize="32sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="10 March 2017"
-                android:textColor="#000000" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:background="@drawable/viewattendance"
-            android:gravity="center"
-            android:padding="12dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingLeft="8dp"
-                android:text="BIOLOGY"
-                android:textColor="#000000"
-                android:textSize="32sp"
-                android:textStyle="bold" />
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginTop="12dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2.5"
+                    android:background="@drawable/background"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/className"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#398DBF"
+                        android:textSize="32sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="10 March 2017"
+                        android:textColor="#000000" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@drawable/viewattendance"
+                    android:gravity="center"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/subject"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=" "
+                        android:textColor="#000000"
+                        android:textSize="32sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical">
+
+                <Spinner
+                    android:id="@+id/chapter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/viewattendance"
+                    android:text="Chapter"
+                    android:textColor="#000000" />
+
+
+                <TextView
+                    android:id="@+id/dueDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:background="@drawable/viewattendance"
+                    android:padding="14dp"
+                    android:text="Due Date"
+                    android:textColor="#000000" />
+
+                <EditText
+                    android:id="@+id/note"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:background="@drawable/viewattendance"
+                    android:focusableInTouchMode="true"
+                    android:gravity="top"
+                    android:hint="Extra Notes"
+                    android:inputType="textMultiLine"
+                    android:lines="9"
+                    android:maxLines="10"
+                    android:minLines="6"
+                    android:padding="12dp"
+                    android:scrollbars="vertical"
+                    android:textColor="#000000" />
+
+                <!--<LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:background="@drawable/viewattendance"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:padding="12dp"
+                        android:text="Pdf-1"
+                        android:textColor="#000000" />
+
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="9dp"
+                        android:gravity="center"
+                        android:paddingBottom="4dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+
+                        android:paddingTop="4dp"
+                        android:src="@drawable/close" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:background="@drawable/viewattendance"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/subject1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:padding="12dp"
+                        android:text="Pdf-1"
+                        android:textColor="#000000" />
+
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="9dp"
+                        android:gravity="center"
+                        android:paddingBottom="4dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="4dp"
+                        android:src="@drawable/close" />
+                </LinearLayout>
+        -->
+                <TextView
+                    android:id="@+id/file"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="12dp"
+                    android:text="Add File"
+                    android:textColor="@color/colorPrimary" />
+
+            </LinearLayout>
+
+
         </LinearLayout>
+    </ScrollView>
 
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
 
-    </LinearLayout>
+        />
 
-    <LinearLayout
+    <Button
+        android:id="@+id/update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="12dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/viewattendance"
-            android:padding="12dp"
-            android:text="Chapter" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/viewattendance"
-            android:padding="12dp"
-            android:text="Sub-Topic" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/viewattendance"
-            android:padding="12dp"
-            android:text="Due Date" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/viewattendance"
-
-            android:focusableInTouchMode="true"
-            android:gravity="top"
-            android:hint="Extra Notes"
-            android:inputType="textMultiLine"
-            android:lines="6"
-            android:maxLines="10"
-            android:minLines="4"
-            android:padding="12dp"
-            android:scrollbars="vertical" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:background="@drawable/viewattendance"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/subject"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:padding="12dp"
-                android:text="Pdf-1"
-                android:textColor="#000000" />
-
-            <ImageView
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:layout_gravity="center"
-                android:layout_marginRight="9dp"
-                android:gravity="center"
-                android:paddingBottom="4dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-
-                android:paddingTop="4dp"
-                android:src="@drawable/close" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:background="@drawable/viewattendance"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/subject1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:padding="12dp"
-                android:text="Pdf-1"
-                android:textColor="#000000" />
-
-            <ImageView
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:layout_gravity="center"
-                android:layout_marginRight="9dp"
-                android:gravity="center"
-                android:paddingBottom="4dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:paddingTop="4dp"
-                android:src="@drawable/close" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="12dp"
-            android:text="Add More"
-            android:textColor="@color/colorPrimary" />
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:padding="12dp"
-            android:textColor="#fff"
-            android:background="#F0920A"
-            android:text="UPDATE"/>
-    </RelativeLayout>
-
-
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/buton_background"
+        android:padding="12dp"
+        android:text="UPDATE"
+        android:textColor="#fff" />
+</RelativeLayout>

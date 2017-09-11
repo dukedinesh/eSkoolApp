@@ -9,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ public class Teacherclswrk extends Fragment {
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
+    DrawerLayout drawer;
 
     public Teacherclswrk(){
 
@@ -37,6 +40,8 @@ public class Teacherclswrk extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_add_class_work, container, false);
+        drawer = (DrawerLayout) ((TeacherHome) getContext()).findViewById(R.id.drawer_asiana);
+
         toolbar = (Toolbar) ((TeacherHome) getContext()).findViewById(R.id.tool_bar);
 
 
@@ -101,8 +106,12 @@ public class Teacherclswrk extends Fragment {
     public void onResume() {
 
         super.onResume();
-        toolbar.setTitle("Class Work");
 
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+        toolbar.setTitle("Class Work");
         User u = (User) getContext().getApplicationContext();
 
         u.back = true;

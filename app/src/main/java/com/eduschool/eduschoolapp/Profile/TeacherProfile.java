@@ -17,6 +17,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eduschool.eduschoolapp.AllAPIs;
@@ -50,7 +51,7 @@ public class TeacherProfile extends Fragment {
     Button change_password;
     SharedPreferences pref;
     SharedPreferences.Editor edit;
-
+    TextView name;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,6 +67,10 @@ public class TeacherProfile extends Fragment {
         change_password = (Button) v.findViewById(R.id.change_password);
         viewPager = (ViewPager) v.findViewById(R.id.viewpager);
         tabLayout = (TabLayout) v.findViewById(R.id.tabs);
+        name=(TextView)v.findViewById(R.id.name);
+        final User b = (User) getActivity().getApplicationContext();
+
+        name.setText(b.user_name);
 
         tabLayout.addTab(tabLayout.newTab().setText("Personal Info"));
         tabLayout.addTab(tabLayout.newTab().setText("Emergency Contact"));
@@ -132,7 +137,7 @@ public class TeacherProfile extends Fragment {
                                         progress.setVisibility(View.GONE);
                                     } else {
 
-                                        final User b = (User) getActivity().getApplicationContext();
+
                                         Retrofit retrofit = new Retrofit.Builder()
                                                 .baseUrl(b.baseURL)
                                                 .addConverterFactory(ScalarsConverterFactory.create())
@@ -150,7 +155,7 @@ public class TeacherProfile extends Fragment {
                                             public void onResponse(Call<PasswrdChngebean> call, Response<PasswrdChngebean> response) {
 
 
-                                                if (response.body().getPasswordChange().get(0).getStatus().equals("1")){
+                                                if (response.body().getPasswordChange().get(0).getStatus().equals("1")) {
 
                                                     edit.putString("pass", SconfrmPass);
                                                     edit.commit();
@@ -160,8 +165,7 @@ public class TeacherProfile extends Fragment {
                                                     oldpass.setText("");
                                                     confrmpass.setText("");
                                                     progress.setVisibility(View.GONE);
-                                                }
-                                                else {
+                                                } else {
                                                     progress.setVisibility(View.GONE);
                                                     Toast.makeText(getContext(), "Incorrect details. Try Again !", Toast.LENGTH_SHORT).show();
 

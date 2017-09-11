@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroud_color">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,13 +26,13 @@
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="100dp"
-                    android:text="Sonam Gupta"
-                    android:layout_marginBottom="5dp"
+                    android:text="  "
                     android:textColor="#fff"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="101dp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -41,11 +42,11 @@
                 app:layout_anchorGravity="bottom|left">
 
                 <com.eduschool.eduschoolapp.RoundedImageView
-                    android:id="@+id/imageView_round"
+                    android:id="@+id/img"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginLeft="12dp"
-                    android:src="@drawable/studentimage"
+
 
                     />
 
@@ -87,9 +88,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#F0920A"
+        android:background="@drawable/buton_background"
         android:padding="18dp"
         android:text="Change Password"
         android:textColor="#ffffff" />
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/progress"
+        android:visibility="gone"/>
 </RelativeLayout>

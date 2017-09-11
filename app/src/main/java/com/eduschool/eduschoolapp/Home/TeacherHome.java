@@ -68,8 +68,9 @@ public class TeacherHome extends AppCompatActivity
     DrawerLayout drawer;
     SharedPreferences pref;
     SharedPreferences.Editor edit;
+    TextView text;
 
-    TextView academic, comm, attendance, logout, home, events, notification, communication1, homewrk, classwrk, syllabus, exm, calendar, studentSummary, library, timeTable, gallery, survey, stayAhead, raiseRequest, profile;
+    TextView academic, comm,user_name, attendance, logout, home, events, notification, communication1, homewrk, classwrk, syllabus, exm, calendar, studentSummary, library, timeTable, gallery, survey, stayAhead, raiseRequest, profile;
     boolean isCollapsed = true;
     boolean isCollapsed1 = true;
 
@@ -125,6 +126,10 @@ public class TeacherHome extends AppCompatActivity
         raiseRequest = (TextView) findViewById(R.id.raiseRequest);
         profile = (TextView) findViewById(R.id.profile);
         communication1 = (TextView) findViewById(R.id.communication1);
+        user_name = (TextView) findViewById(R.id.user_name1);
+
+        User b = (User) getApplicationContext();
+        user_name.setText("Welcome " +b.user_name);
 
 
         logout.setOnClickListener(new View.OnClickListener() {

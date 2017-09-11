@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         card_view:cardCornerRadius="4dp"
+
         card_view:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -23,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                android:id="@+id/name"
+                android:id="@+id/qus"
                 android:text="Q. Sed ut perspiciatis unde omnis iste ns error sit vol accum mque ntium sd sds dcd se fcc fedee?" />
 
             <RelativeLayout
@@ -34,7 +35,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="15-06-2017" />
+                    android:text="15-06-2017"
+                    android:id="@+id/date"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -45,6 +47,7 @@
                     android:background="@drawable/round_corner"
                     android:padding="6dp"
                     android:text="Pending"
+                    android:id="@+id/status"
                     android:textColor="#fff" />
 
             </RelativeLayout>

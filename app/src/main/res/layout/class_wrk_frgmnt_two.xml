@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@drawable/backgroud_color"
     android:orientation="vertical">
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        >
 
 
         <ScrollView
@@ -26,528 +27,47 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginTop="22dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="6dp"
+                    android:layout_marginTop="12dp"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="12dp"
-                        android:text="Student Name" />
+                        android:layout_weight="1"
+                        android:text="Student Name"
+                        android:id="@+id/name"
+                        android:textSize="18dp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="8A" />
+                        android:layout_marginRight="12dp"
+                        android:layout_weight="0.5"
+                        android:gravity="right"
+                        android:text="8A"
+                        android:id="@+id/classSection"
+                        android:textSize="18dp" />
 
                 </LinearLayout>
 
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="12dp"
                     android:orientation="vertical">
 
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/card"
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardUseCompatPadding="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
 
-                        >
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
+                    </android.support.v7.widget.RecyclerView>
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:background="#dcdcdc"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="10dp">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="12"
-                                    android:textSize="28sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="March 2017" />
-
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:padding="12dp">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:paddingTop="5dp"
-                                    android:text="Mathematics"
-                                    android:textColor="#F0920A" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:paddingTop="5dp"
-                                    android:text="Unit:4.1" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:paddingTop="5dp"
-                                        android:text="Status:" />
-
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:paddingTop="5dp"
-                                        android:text=" Reading" />
-                                </LinearLayout>
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-
-                    </android.support.v7.widget.CardView>
-
-                    //2
-
-
-                    <android.support.v7.widget.CardView
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardUseCompatPadding="true"
-
-                        >
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:background="#dcdcdc"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="10dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="12"
-                                    android:textSize="28sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="March 2017" />
-
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:padding="12dp">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:paddingTop="5dp"
-                                    android:text="Mathematics"
-                                    android:textColor="#F0920A" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:paddingTop="5dp"
-                                    android:text="Unit:4.1" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:paddingTop="5dp"
-                                        android:text="Status:" />
-
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:paddingTop="5dp"
-                                        android:text=" Reading" />
-                                </LinearLayout>
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-
-                    </android.support.v7.widget.CardView>
-                    //3
-
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardUseCompatPadding="true"
-
-                        >
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:background="#dcdcdc"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="10dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="12"
-                                    android:textSize="28sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="March 2017" />
-
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:padding="12dp">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:paddingTop="5dp"
-                                    android:text="Mathematics"
-                                    android:textColor="#F0920A" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:paddingTop="5dp"
-                                    android:text="Unit:4.1" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:paddingTop="5dp"
-                                        android:text="Status:" />
-
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:paddingTop="5dp"
-                                        android:text=" Reading" />
-                                </LinearLayout>
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-
-                    </android.support.v7.widget.CardView>
-                    //4
-
-
-                    <android.support.v7.widget.CardView
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardUseCompatPadding="true"
-
-                        >
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:background="#dcdcdc"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="10dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="12"
-                                    android:textSize="28sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="March 2017" />
-
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:padding="12dp">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:paddingTop="5dp"
-                                    android:text="Mathematics"
-                                    android:textColor="#F0920A" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:paddingTop="5dp"
-                                    android:text="Unit:4.1" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:paddingTop="5dp"
-                                        android:text="Status:" />
-
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:paddingTop="5dp"
-                                        android:text=" Reading" />
-                                </LinearLayout>
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-
-                    </android.support.v7.widget.CardView>
-                    //5
-
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardUseCompatPadding="true"
-
-                        >
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:background="#dcdcdc"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="10dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="12"
-                                    android:textSize="28sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="March 2017" />
-
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:padding="12dp">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:paddingTop="5dp"
-                                    android:text="Mathematics"
-                                    android:textColor="#F0920A" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:paddingTop="5dp"
-                                    android:text="Unit:4.1" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:paddingTop="5dp"
-                                        android:text="Status:" />
-
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:paddingTop="5dp"
-                                        android:text=" Reading" />
-                                </LinearLayout>
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-
-                    </android.support.v7.widget.CardView>
-                    //6
-
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardUseCompatPadding="true"
-
-                        >
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:background="#dcdcdc"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="10dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="12"
-                                    android:textSize="28sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="March 2017" />
-
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:padding="12dp">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:paddingTop="5dp"
-                                    android:text="Mathematics"
-                                    android:textColor="#F0920A" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:paddingTop="5dp"
-                                    android:text="Unit:4.1" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:paddingTop="5dp"
-                                        android:text="Status:" />
-
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:paddingTop="5dp"
-                                        android:text=" Reading" />
-                                </LinearLayout>
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-
-                    </android.support.v7.widget.CardView>
                 </LinearLayout>
 
 
@@ -556,14 +76,20 @@
 
 
     </LinearLayout>
-
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/progress"
+        android:visibility="gone"/>
     <android.support.design.widget.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/fab"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
         android:src="@drawable/ic_filter"
         app:backgroundTint="@color/colorPrimary"
-        app:borderWidth="0dp" />
+        app:borderWidth="0dp"
+        tools:layout_editor_absoluteY="516dp" />
 </android.support.design.widget.CoordinatorLayout>

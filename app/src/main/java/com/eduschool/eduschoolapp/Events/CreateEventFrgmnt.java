@@ -12,105 +12,268 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.sql.Time;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
+import com.eduschool.eduschoolapp.AllAPIs;
+import com.eduschool.eduschoolapp.ClassListPOJO.ClassList;
+import com.eduschool.eduschoolapp.ClassListPOJO.ClassListbean;
+import com.eduschool.eduschoolapp.Communication.ComposeMessage;
+import com.eduschool.eduschoolapp.CreateEventTecherPOJO.CreateEventTechrBean;
 import com.eduschool.eduschoolapp.Home.TeacherHome;
 import com.eduschool.eduschoolapp.R;
+import com.eduschool.eduschoolapp.SectionListPOJO.SectionList;
+import com.eduschool.eduschoolapp.SectionListPOJO.SectionListbean;
 import com.eduschool.eduschoolapp.User;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * Created by user on 6/15/2017.
  */
 
-public class CreateEventFrgmnt extends Fragment {
-
-
+public class CreateEventFrgmnt extends AppCompatActivity {
     Toolbar toolbar;
+    ProgressBar progress;
     LinearLayout date1, date2, time;
+    TextView tv_date;
+    static TextView tv_time;
+    TextView tv_date1;
+    String date, datee;
+    String cId, sId, noteString;
+    Spinner type, classSpinner, sectionSpinner;
+    List<String> dummyList;
+    public List<String> classlist, sectionlist, subjectlist, chapterlist, studentlist, statuslist;
+    public List<String> classId, sectionId, subjectId, chapterId, studentId;
+    public List<SectionList> listSection;
+    List<ClassList> list;
     Button submit;
-    TextView className, sectionName;
-    static TextView tv_date, tv_time, tv_date1;
+    int pos;
+    public String s;
+    EditText note;
 
 
-    @Nullable
+    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_compose_message);
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        toolbar.setTitle("Compose message");
+        toolbar.setTitleTextColor(0xFFFFFFFF);
+        toolbar.setNavigationIcon(R.drawable.back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        progress = (ProgressBar) findViewById(R.id.progress);
+        date1 = (LinearLayout) findViewById(R.id.date1);
+        date2 = (LinearLayout) findViewById(R.id.date2);
+        time = (LinearLayout) findViewById(R.id.time);
+        tv_date1 = (TextView) findViewById(R.id.tv_date1);
+        tv_time = (TextView) findViewById(R.id.tv_time);
+        tv_date = (TextView) findViewById(R.id.tv_date);
+        type = (Spinner) findViewById(R.id.type);
+        classSpinner = (Spinner) findViewById(R.id.className);
+        sectionSpinner = (Spinner) findViewById(R.id.sectonName);
+        submit = (Button) findViewById(R.id.submit);
+        note = (EditText) findViewById(R.id.note);
+        noteString = note.getText().toString().trim();
+        dummyList = new ArrayList<>();
+        dummyList.add("Select");
+        dummyList.add("PTM");
+        dummyList.add("Collect Report Card");
 
-        View view = inflater.inflate(R.layout.create_event, container, false);
-        toolbar = (Toolbar) ((TeacherHome) getContext()).findViewById(R.id.tool_bar);
-        date1 = (LinearLayout) view.findViewById(R.id.date1);
-        date2 = (LinearLayout) view.findViewById(R.id.date2);
-        time = (LinearLayout) view.findViewById(R.id.time);
-        tv_date1 = (TextView) view.findViewById(R.id.tv_date1);
-        tv_time = (TextView) view.findViewById(R.id.tv_time);
-        tv_date = (TextView) view.findViewById(R.id.tv_date);
-        className = (TextView) view.findViewById(R.id.className);
-        sectionName = (TextView) view.findViewById(R.id.sectonName);
 
-        final String classes[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "12"};
-        final String section[] = {"A", "B", "C", "D", "E", "F", "G", "H"};
+        list = new ArrayList<>();
+        classlist = new ArrayList<>();
+        classId = new ArrayList<>();
+
+        listSection = new ArrayList<>();
+        sectionlist = new ArrayList<>();
+        sectionId = new ArrayList<>();
 
 
-        className.setOnClickListener(new View.OnClickListener() {
+        final User b = (User) getApplicationContext();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(b.baseURL)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
+        final AllAPIs cr = retrofit.create(AllAPIs.class);
+
+        Call<ClassListbean> call = cr.classList(b.school_id);
+        progress.setVisibility(View.VISIBLE);
+
+        call.enqueue(new Callback<ClassListbean>() {
+            @Override
+            public void onResponse(Call<ClassListbean> call, Response<ClassListbean> response) {
+
+
+                list = response.body().getClassList();
+
+                classlist.clear();
+                classId.clear();
+
+                for (int i = 0; i < list.size(); i++) {
+
+                    if (list.get(i).getClassName() != null && list.get(i).getClassId() != null) {
+
+                        classlist.add(list.get(i).getClassName());
+                        classId.add(list.get(i).getClassId());
+                    }
+
+                }
+
+                ArrayAdapter<String> adp1 = new ArrayAdapter<String>(CreateEventFrgmnt.this,
+                        R.layout.spinner_item, classlist);
+                adp1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                classSpinner.setAdapter(adp1);
+
+
+                progress.setVisibility(View.GONE);
+
+            }
 
             @Override
-            public void onClick(View view) {
+            public void onFailure(Call<ClassListbean> call, Throwable throwable) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Select Class");
-                builder.setItems(classes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int item) {
-                        // Do something with the selection
-                        className.setText(classes[item]);
-                    }
-                });
-                AlertDialog alert = builder.create();
-                alert.show();
+                progress.setVisibility(View.GONE);
+
             }
         });
 
-        sectionName.setOnClickListener(new View.OnClickListener() {
+        classSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+                cId = classId.get(position);
+                Call<SectionListbean> call2 = cr.sectionList(b.school_id, classId.get(position));
+                progress.setVisibility(View.VISIBLE);
+
+                call2.enqueue(new Callback<SectionListbean>() {
+
+                    @Override
+                    public void onResponse(Call<SectionListbean> call, Response<SectionListbean> response) {
+
+
+                        listSection = response.body().getSectionList();
+                        sectionId.clear();
+                        sectionlist.clear();
+
+                        for (int i = 0; i < response.body().getSectionList().size(); i++) {
+
+                            sectionlist.add(response.body().getSectionList().get(i).getSectionName());
+
+                            sectionId.add(response.body().getSectionList().get(i).getSectionId());
+                        }
+
+
+                        ArrayAdapter<String> adp = new ArrayAdapter<String>(CreateEventFrgmnt.this,
+                                R.layout.spinner_item, sectionlist);
+
+                        adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        adp.notifyDataSetChanged();
+                        sectionSpinner.setAdapter(adp);
+
+                        progress.setVisibility(View.GONE);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<SectionListbean> call, Throwable throwable) {
+                        progress.setVisibility(View.GONE);
+
+                    }
+
+                });
+
+            }
 
             @Override
-            public void onClick(View view) {
+            public void onNothingSelected(AdapterView<?> parent) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Select Section");
-                builder.setItems(section, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int item) {
-                        // Do something with the selection
-                        sectionName.setText(section[item]);
-                    }
-                });
-                AlertDialog alert = builder.create();
-                alert.show();
             }
         });
 
+        sectionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sId = sectionId.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        ArrayAdapter<String> adp1 = new ArrayAdapter<String>(CreateEventFrgmnt.this,
+                R.layout.spinner_item, dummyList);
+        adp1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        type.setAdapter(adp1);
+
+        type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                pos = position;
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         date1.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
-                DialogFragment newFragment = new DatePickerFragment2();
-                newFragment.show(getActivity().getFragmentManager(), "df");
+                DialogFragment newFragment = new CreateEventFrgmnt.SelectDateFragment1();
+                newFragment.show(CreateEventFrgmnt.this.getFragmentManager(), "DatePicker");
+
             }
         });
 
@@ -119,8 +282,9 @@ public class CreateEventFrgmnt extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
-                DialogFragment newFragment = new DatePickerFragment();
-                newFragment.show(getActivity().getFragmentManager(), "df");
+                DialogFragment newFragment = new CreateEventFrgmnt.SelectDateFragment();
+                newFragment.show(CreateEventFrgmnt.this.getFragmentManager(), "DatePicker");
+
             }
         });
 
@@ -128,122 +292,196 @@ public class CreateEventFrgmnt extends Fragment {
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogFragment newFragment = new TimePickerFragment();
-                newFragment.show(getActivity().getFragmentManager(), "TimePicker");
+                DialogFragment newFragment = new CreateEventFrgmnt.TimePickerFragment();
+                newFragment.show(CreateEventFrgmnt.this.getFragmentManager(), "TimePicker");
 
             }
         });
 
 
-        submit = (Button) view.findViewById(R.id.submit);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
 
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-                dialog.setCancelable(false);
-                dialog.setMessage("Are you sure you want to create the Event ?");
-                dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        //Action for "Delete".
-                        dialog.dismiss();
+                if (pos == 0 || tv_date.getText().equals("Start Date") || tv_date1.getText().equals("End Date") || tv_time.getText().equals("Time")) {
 
+                    Toast.makeText(CreateEventFrgmnt.this, "Please select all fields!", Toast.LENGTH_SHORT).show();
+                } else {
+
+
+                    JSONArray jsonArray = new JSONArray();
+                    JSONArray jsonArray1 = new JSONArray();
+
+                    JSONObject object2 = new JSONObject();
+                    JSONObject object = new JSONObject();
+
+                    try {
+                        object2.put("Id", cId);
+
+                        jsonArray.put(object2);
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                })
-                        .setNegativeButton("No ", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //Action for "Cancel".
-                            }
-                        });
 
-                final AlertDialog alert = dialog.create();
-                alert.show();
+
+                    try {
+
+                        object.put("Id", sId);
+
+                        jsonArray1.put(object);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    final JSONObject jsonObject = new JSONObject();
+                    final JSONObject jsonObject1 = new JSONObject();
+
+                    try {
+
+                        jsonObject.put("class_id", jsonArray);
+                        jsonObject1.put("section_id", jsonArray1);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Log.d("dsds", jsonObject.toString());
+                    Log.d("dsds", jsonObject1.toString());
+
+
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(CreateEventFrgmnt.this);
+                    dialog.setCancelable(false);
+                    dialog.setMessage("Are you sure you want to Create this Event ?");
+                    dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+
+                            s=tv_time.getText().toString();
+                            String[] sep;
+                            sep=s.split(":");
+                            Log.d("time",sep[0]);
+                            Log.d("time",sep[1]);
+
+                            String[]seprate;
+                            seprate=sep[1].split(" ");
+                            Log.d("timeee",seprate[0]);
+
+
+
+                            User b = (User) getApplicationContext();
+
+                            Retrofit retrofit = new Retrofit.Builder()
+                                    .baseUrl(b.baseURL)
+                                    .addConverterFactory(ScalarsConverterFactory.create())
+                                    .addConverterFactory(GsonConverterFactory.create())
+                                    .build();
+
+                            AllAPIs cr = retrofit.create(AllAPIs.class);
+                            progress.setVisibility(View.VISIBLE);
+
+                            Call<CreateEventTechrBean> call = cr.crt_event(b.school_id, tv_date.getText().toString(), tv_date1.getText().toString(), tv_time.getText().toString(), sep[0], seprate[0], type.getSelectedItem().toString(), noteString, b.user_id, b.user_type, "Parent", jsonObject.toString(), jsonObject1.toString());
+
+                            call.enqueue(new Callback<CreateEventTechrBean>() {
+                                @Override
+                                public void onResponse(Call<CreateEventTechrBean> call, Response<CreateEventTechrBean> response) {
+
+                                    if (response.body().getStatus().equals("1")) {
+                                        Toast.makeText(CreateEventFrgmnt.this, "Event has been Created Successfully", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    } else {
+                                        Toast.makeText(CreateEventFrgmnt.this, "Event creation Failed!", Toast.LENGTH_SHORT).show();
+
+                                        finish();
+                                    }
+
+                                    progress.setVisibility(View.GONE);
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<CreateEventTechrBean> call, Throwable throwable) {
+
+                                    progress.setVisibility(View.GONE);
+
+                                }
+                            });
+
+
+                        }
+                    })
+                            .setNegativeButton("No ", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //Action for "Cancel".
+                                }
+                            });
+
+
+                    final AlertDialog alert = dialog.create();
+                    alert.show();
+
+                }
             }
         });
 
 
-        return view;
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        toolbar.setTitle("Create Event");
-        User u = (User) getContext().getApplicationContext();
-
-        u.back = false;
     }
 
     @SuppressLint("ValidFragment")
-    public class DatePickerFragment2 extends DialogFragment implements DatePickerDialog.OnDateSetListener {
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int day) {
-            String years = "" + year;
-            String months = "" + (monthOfYear + 1);
-            String days = "" + day;
-
-            if (monthOfYear >= 0 && monthOfYear < 9) {
-                months = "0" + (monthOfYear + 1);
-            }
-            if (day > 0 && day < 10) {
-                days = "0" + day;
-
-            }
-            tv_date.setText(days + "/" + months + "/" + years);
-        }
+    public class SelectDateFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            //use the current date as the default date in the picker
-            Calendar c = Calendar.getInstance();
-            @SuppressLint("WrongConstant") int year = c.get(Calendar.YEAR);
-            @SuppressLint("WrongConstant") int month = c.get(Calendar.MONTH);
-            @SuppressLint("WrongConstant") int day = c.get(Calendar.DAY_OF_MONTH);
-
-            DatePickerDialog datePickerDialog = null;
-            datePickerDialog = new DatePickerDialog(getActivity(), this, year, month, day);
-
-            return datePickerDialog;
+            final Calendar calendar = Calendar.getInstance();
+            @SuppressLint("WrongConstant") int yy = calendar.get(Calendar.YEAR);
+            @SuppressLint("WrongConstant") int mm = calendar.get(Calendar.MONTH);
+            @SuppressLint("WrongConstant") int dd = calendar.get(Calendar.DAY_OF_MONTH);
+            return new DatePickerDialog(getActivity(), this, yy, mm, dd);
         }
 
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            Calendar c = Calendar.getInstance();
+            c.set(year, month, day);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+            String formattedDate = sdf.format(c.getTime());
+            date = formattedDate;
+            tv_date1.setText(date);
+
+        }
     }
 
 
     @SuppressLint("ValidFragment")
-    public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int day) {
-            String years = "" + year;
-            String months = "" + (monthOfYear + 1);
-            String days = "" + day;
-
-            if (monthOfYear >= 0 && monthOfYear < 9) {
-                months = "0" + (monthOfYear + 1);
-            }
-            if (day > 0 && day < 10) {
-                days = "0" + day;
-
-            }
-            tv_date1.setText(days + "/" + months + "/" + years);
-        }
+    public class SelectDateFragment1 extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            //use the current date as the default date in the picker
-            Calendar c = Calendar.getInstance();
-            @SuppressLint("WrongConstant") int year = c.get(Calendar.YEAR);
-            @SuppressLint("WrongConstant") int month = c.get(Calendar.MONTH);
-            @SuppressLint("WrongConstant") int day = c.get(Calendar.DAY_OF_MONTH);
-
-            DatePickerDialog datePickerDialog = null;
-            datePickerDialog = new DatePickerDialog(getActivity(), this, year, month, day);
-
-            return datePickerDialog;
+            final Calendar calendar = Calendar.getInstance();
+            @SuppressLint("WrongConstant") int yy = calendar.get(Calendar.YEAR);
+            @SuppressLint("WrongConstant") int mm = calendar.get(Calendar.MONTH);
+            @SuppressLint("WrongConstant") int dd = calendar.get(Calendar.DAY_OF_MONTH);
+            return new DatePickerDialog(getActivity(), this, yy, mm, dd);
         }
 
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            Calendar c = Calendar.getInstance();
+            c.set(year, month, day);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+            String formattedDate = sdf.format(c.getTime());
+            datee = formattedDate;
+            tv_date.setText(datee);
+
+
+        }
     }
 
     public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
@@ -261,7 +499,6 @@ public class CreateEventFrgmnt extends Fragment {
                 AM_PM = "PM";
             }
 
-
             //Create and return a new instance of TimePickerDialog
             return new TimePickerDialog(getActivity(), this, hour, minute,
                     DateFormat.is24HourFormat(getActivity()));
@@ -272,6 +509,8 @@ public class CreateEventFrgmnt extends Fragment {
             Format formatter;
             formatter = new SimpleDateFormat("h:mm a");
             return formatter.format(tme);
+
+
         }
 
         //onTimeSet() callback method
@@ -284,9 +523,10 @@ public class CreateEventFrgmnt extends Fragment {
             //Display the user changed time on TextView
             tv_time.setText(getTime(hourOfDay, minute));
 
+
         }
+
     }
 
 
 }
-

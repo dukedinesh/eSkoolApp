@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.v7.widget.Toolbar;
@@ -16,13 +17,20 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eduschool.eduschoolapp.AllAPIs;
 import com.eduschool.eduschoolapp.ChangePssPOJO.PasswrdChngebean;
 import com.eduschool.eduschoolapp.Home.ParentHome;
+import com.eduschool.eduschoolapp.ParentContactPOJO.ParentContactBean;
+import com.eduschool.eduschoolapp.ParentPersnlPOJO.ParentPrsnlBean;
 import com.eduschool.eduschoolapp.R;
+import com.eduschool.eduschoolapp.RoundedImageView;
 import com.eduschool.eduschoolapp.User;
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,6 +48,10 @@ public class ParentProfile extends Fragment {
     Toolbar toolbar;
     SharedPreferences pref;
     SharedPreferences.Editor edit;
+    TextView name;
+    String s;
+    ProgressBar progress;
+    RoundedImageView img;
 
     public ParentProfile() {
 
@@ -56,6 +68,12 @@ public class ParentProfile extends Fragment {
         change_password = (Button) v.findViewById(R.id.change_password);
         viewPager = (ViewPager) v.findViewById(R.id.viewpager);
         tabLayout = (TabLayout) v.findViewById(R.id.tabs);
+        name = (TextView) v.findViewById(R.id.name);
+        progress = (ProgressBar) v.findViewById(R.id.progress);
+        img = (RoundedImageView) v.findViewById(R.id.img);
+
+        final User b = (User) getActivity().getApplicationContext();
+        name.setText(b.user_name);
 
         pref = getContext().getSharedPreferences("mypref", MODE_PRIVATE);
         edit = pref.edit();
@@ -71,6 +89,47 @@ public class ParentProfile extends Fragment {
 
 
         tabLayout.setupWithViewPager(viewPager);
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(b.baseURL)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        AllAPIs cr = retrofit.create(AllAPIs.class);
+        progress.setVisibility(View.VISIBLE);
+
+        Call<ParentPrsnlBean> call = cr.parent_personl(b.school_id, b.user_id);
+
+
+        call.enqueue(new Callback<ParentPrsnlBean>() {
+            @Override
+            public void onResponse(Call<ParentPrsnlBean> call, Response<ParentPrsnlBean> response) {
+
+                // s = response.body().getProfilePic();
+//                Log.d("vvvvvvv",String.valueOf(response.body().getProfilePic()));
+
+                if (response.body().getProfilePic().length() == 0) {
+
+                    Log.d("one","sc");
+                    Picasso.with(getActivity()).load(R.drawable.default_avatar).into(img);
+
+                } else {
+                    Log.d("two","cvc");
+                    Picasso.with(getActivity()).load(response.body().getProfilePic()).into(img);
+                }
+                progress.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onFailure(Call<ParentPrsnlBean> call, Throwable throwable) {
+
+                progress.setVisibility(View.GONE);
+
+            }
+        });
 
 
         change_password.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +180,7 @@ public class ParentProfile extends Fragment {
                                         progress.setVisibility(View.GONE);
                                     } else {
 
-                                        final User b = (User) getActivity().getApplicationContext();
+
                                         Retrofit retrofit = new Retrofit.Builder()
                                                 .baseUrl(b.baseURL)
                                                 .addConverterFactory(ScalarsConverterFactory.create())
@@ -131,14 +190,14 @@ public class ParentProfile extends Fragment {
                                         AllAPIs cr = retrofit.create(AllAPIs.class);
 
 
-                                        Call<PasswrdChngebean> call1 = cr.chngrPass(b.school_id, b.user_type, Snewpass, Soldpass , b.user_id);
+                                        Call<PasswrdChngebean> call1 = cr.chngrPass(b.school_id, b.user_type, Snewpass, Soldpass, b.user_id);
 
 
                                         call1.enqueue(new Callback<PasswrdChngebean>() {
                                             @Override
                                             public void onResponse(Call<PasswrdChngebean> call, Response<PasswrdChngebean> response) {
 
-                                                if (response.body().getPasswordChange().get(0).getStatus().equals("1")){
+                                                if (response.body().getPasswordChange().get(0).getStatus().equals("1")) {
 
                                                     edit.putString("pass", SconfrmPass);
                                                     edit.commit();
@@ -148,8 +207,7 @@ public class ParentProfile extends Fragment {
                                                     oldpass.setText("");
                                                     confrmpass.setText("");
                                                     progress.setVisibility(View.GONE);
-                                                }
-                                                else {
+                                                } else {
                                                     progress.setVisibility(View.GONE);
                                                     Toast.makeText(getContext(), "Incorrect details. Try Again !", Toast.LENGTH_SHORT).show();
 

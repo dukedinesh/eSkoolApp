@@ -1,17 +1,13 @@
 package com.eduschool.eduschoolapp.StudentSummary;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import com.eduschool.eduschoolapp.Library.Album;
 import com.eduschool.eduschoolapp.R;
-import com.eduschool.eduschoolapp.Survey.AdapterSurvey;
-import com.eduschool.eduschoolapp.Survey.Album;
-import com.eduschool.eduschoolapp.Survey.Take_Survey;
 
 import java.util.List;
 

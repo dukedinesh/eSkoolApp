@@ -10,7 +10,7 @@ android {
         }
     }
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "com.eduschool.eduschoolapp"
         minSdkVersion 19
@@ -52,6 +52,7 @@ dependencies {
     compile 'com.github.myinnos:AwesomeImagePicker:1.0.1'
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:converter-scalars:2.1.0'
     compile 'com.google.android.gms:play-services-auth:9.8.0'

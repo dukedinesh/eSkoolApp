@@ -2,263 +2,65 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/backgroud_color">
 
-    <ScrollView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+
+       >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="55dp"
+           >
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/replace"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_marginTop="15dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/background"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="12dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="10"
-                            android:textColor="#000000"
-                            android:textSize="38sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="March 2017"
-                            android:textColor="#000000" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:background="@drawable/viewattendance"
-                        android:gravity="center">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="12sp"
-                                android:text="BIOLOGY"
-                                android:textColor="#000000"
-                                android:textSize="28sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="12sp"
-                                android:text="8A"
-                                android:textColor="#000000"
-                                android:textSize="28sp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-                        <ImageView
-                            android:id="@+id/change"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_gravity="bottom"
-                            android:rotation="22"
-                            android:src="@drawable/edit"
-                            android:textColor="@color/colorPrimary" />
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginRight="12dp"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/viewattendance1"
-                        android:padding="12dp"
-                        android:text="Today"
-                        android:textColor="#ffffff" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginRight="12dp"
-                        android:background="@drawable/viewattendance">
-
-                        <ImageView
-                            android:id="@+id/album1"
-                            android:layout_width="0dp"
-                            android:layout_height="100dp"
-                            android:layout_margin="12dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/logo1" />
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="100dp"
-                            android:layout_gravity="center"
-                            android:layout_margin="12dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/logo1" />
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="100dp"
-                            android:layout_margin="12dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/logo1" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginRight="12dp"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/viewattendance1"
-                        android:padding="12dp"
-                        android:text="Yesterday"
-                        android:textColor="#ffffff" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginRight="12dp"
-                        android:background="@drawable/viewattendance"
-                        android:orientation="vertical"
-                        android:layout_marginBottom="55dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <ImageView
-                                android:layout_width="0dp"
-                                android:layout_height="100dp"
-                                android:layout_margin="12dp"
-                                android:layout_weight="1"
-                                android:src="@drawable/logo1" />
-
-                            <ImageView
-                                android:layout_width="0dp"
-                                android:layout_height="100dp"
-                                android:layout_gravity="center"
-                                android:layout_margin="12dp"
-                                android:layout_weight="1"
-                                android:src="@drawable/logo1" />
-
-                            <ImageView
-                                android:layout_width="0dp"
-                                android:layout_height="100dp"
-                                android:layout_margin="12dp"
-                                android:layout_weight="1"
-                                android:src="@drawable/logo1" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <ImageView
-                                android:layout_width="0dp"
-                                android:layout_height="100dp"
-                                android:layout_margin="12dp"
-                                android:layout_weight="1"
-                                android:src="@drawable/logo1" />
-
-                            <ImageView
-                                android:layout_width="0dp"
-                                android:layout_height="100dp"
-                                android:layout_gravity="center"
-                                android:layout_margin="12dp"
-                                android:layout_weight="1"
-                                android:src="@drawable/logo1" />
-
-                            <ImageView
-                                android:layout_width="0dp"
-                                android:layout_height="100dp"
-                                android:layout_margin="12dp"
-                                android:layout_weight="1"
-                                android:src="@drawable/logo1" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:id="@+id/replace"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                </LinearLayout>
-            </LinearLayout>
-
-
-
         </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
+
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        >
+        android:layout_marginTop="12dp">
 
         <Button
+            android:id="@+id/add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="#F0920A"
+            android:background="@drawable/buton_background"
             android:padding="12dp"
             android:text="ADD AN ALBUM"
-            android:textColor="#ffffff"
-            android:id="@+id/add"/>
+            android:textColor="#ffffff" />
     </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
     <android.support.design.widget.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -270,5 +72,6 @@
         android:src="@drawable/ic_filter"
         app:backgroundTint="@color/colorPrimary"
         app:borderWidth="0dp" />
+
 </android.support.design.widget.CoordinatorLayout>
 

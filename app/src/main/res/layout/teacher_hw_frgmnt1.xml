@@ -3,138 +3,143 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backgroud_color"
     android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="55dp">
+        android:layout_marginBottom="59dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="12dp"
-                android:orientation="vertical"
-                android:paddingBottom="50dp">
+                android:orientation="vertical">
 
-
-                <TextView
-                    android:id="@+id/date"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/viewattendance"
-                    android:text="Date"
-                    android:padding="12dp"
-                    android:textSize="18dp" />
-
-                <Spinner
-                    android:id="@+id/className"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/viewattendance"
-                    android:textColorHint="#c9c8c8"
-                    android:textSize="18dp" />
-
-                <Spinner
-                    android:id="@+id/sectonName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/viewattendance"
-                    android:textColorHint="#c9c8c8"
-
-                    android:textSize="18dp" />
-
-                <Spinner
-                    android:id="@+id/subjectName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/viewattendance"
-                    android:hint="Subject"
-                    android:textColorHint="#c9c8c8"
-                    android:textSize="18dp" />
-
-                <Spinner
-                    android:id="@+id/chapter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/viewattendance"
-                    android:hint="Chapter"
-                    android:textColorHint="#c9c8c8"
-                    android:textSize="18dp" />
+                    android:orientation="vertical">
 
 
-                <TextView
-                    android:id="@+id/due_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/viewattendance"
-                    android:text="Due Date"
-                    android:padding="12dp"
-                    android:textColorHint="#c9c8c8"
-                    android:textSize="18dp" />
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/viewattendance"
+                        android:padding="12dp"
+                        android:text="Date"
+                        android:textSize="18dp" />
+
+                    <Spinner
+                        android:id="@+id/className"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/viewattendance"
+                        android:textColorHint="#c9c8c8"
+                        android:textSize="18dp" />
+
+                    <Spinner
+                        android:id="@+id/sectonName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/viewattendance"
+                        android:textColorHint="#c9c8c8"
+
+                        android:textSize="18dp" />
+
+                    <Spinner
+                        android:id="@+id/subjectName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/viewattendance"
+                        android:hint="Subject"
+                        android:textColorHint="#c9c8c8"
+                        android:textSize="18dp" />
+
+                    <Spinner
+                        android:id="@+id/chapter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/viewattendance"
+                        android:hint="Chapter"
+                        android:textColorHint="#c9c8c8"
+                        android:textSize="18dp" />
 
 
-                <TextView
+                    <TextView
+                        android:id="@+id/due_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/viewattendance"
+                        android:padding="12dp"
+                        android:text="Due Date"
+                        android:textColorHint="#c9c8c8"
+                        android:textSize="18dp" />
 
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/viewattendance1"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:text="UPLOAD FILE"
-                    android:id="@+id/upload"
-                    android:textColor="#fff"
-                    android:textSize="18dp" />
 
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/viewattendance"
-                    android:focusableInTouchMode="true"
-                    android:gravity="top|left"
-                    android:hint="Add Notes.."
-                    android:inputType="textMultiLine"
-                    android:lines="6"
-                    android:maxLines="10"
-                    android:id="@+id/note"
-                    android:minLines="4"
-                    android:padding="12dp"
-                    android:scrollbars="vertical"
-                    android:textColorHint="#c9c8c8" />
+                    <TextView
 
+                        android:id="@+id/upload"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/viewattendance1"
+                        android:gravity="center"
+                        android:padding="12dp"
+                        android:text="UPLOAD FILE"
+                        android:textColor="#fff"
+                        android:textSize="16dp" />
+
+                    <EditText
+                        android:id="@+id/note"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/viewattendance"
+                        android:focusableInTouchMode="true"
+                        android:gravity="top|left"
+                        android:hint="Add Notes.."
+                        android:inputType="textMultiLine"
+                        android:lines="6"
+                        android:maxLines="10"
+                        android:minLines="4"
+                        android:padding="12dp"
+                        android:scrollbars="vertical"
+                        android:textColorHint="#c9c8c8" />
+
+
+                </LinearLayout>
 
             </LinearLayout>
-
         </LinearLayout>
-
     </ScrollView>
 
 
     <Button
+        android:id="@+id/submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="34dp"
-        android:background="#F0920A"
+        android:background="@drawable/buton_background"
         android:padding="18dp"
         android:text="ADD"
-        android:id="@+id/submit"
         android:textColor="#ffffff" />
 
 

@@ -1,6 +1,7 @@
 package com.eduschool.eduschoolapp.ClassWork;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -91,9 +92,15 @@ public class AdapterClsWrkList extends RecyclerView.Adapter<AdapterClsWrkList.my
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    String pos = list.get(getAdapterPosition()).getClassworkId();
+
                     android.support.v4.app.FragmentManager fm=((AppCompatActivity)context).getSupportFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
                     TeacherClsWrk2 frag1 = new TeacherClsWrk2();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("message", pos);
+                    frag1.setArguments(bundle);
                     ft.replace(R.id.replace, frag1);
                     ft.addToBackStack(null);
                     ft.commit();
